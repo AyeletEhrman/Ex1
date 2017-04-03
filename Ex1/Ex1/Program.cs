@@ -10,7 +10,8 @@ namespace Ex1
     {
         static void Main(string[] args)
         {
-            //riki
-        }
+            Console.WriteLine("hi");
+            string str = Console.ReadLine();
+        }//
     }
 }
