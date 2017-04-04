@@ -1,7 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OptimizedPriorityQueue" Version="4.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MazeGeneratorLib">
+      <HintPath>..\..\..\..\..\Desktop\MazeGeneratorLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MazeLib">
+      <HintPath>..\..\..\..\..\Desktop\MazeLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 
 </Project>
