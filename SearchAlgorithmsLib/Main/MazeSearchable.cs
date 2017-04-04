@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using System.Text;
 using MazeLib;
-
-namespace SearchAlgorithmsLib
+using SearchAlgorithmsLib;
+namespace Main
 {
     public class MazeSearchable : ISearchable<Position>
     {
