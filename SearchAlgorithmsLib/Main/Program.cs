@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SearchAlgorithmsLib;
+using MazeLib;
+using MazeGeneratorLib;
 
 namespace Main
 {
@@ -15,7 +18,18 @@ namespace Main
 
         public static void CompareSolvers()
         {
-
+            IMazeGenerator gen = new DFSMazeGenerator();
+            Maze maze = gen.Generate(50, 50);
+            Console.Write(maze);
+            ISearchable<Position> myMaze = new MazeSearchable(maze);
+            ISearcher<Position> bfs = new Bfs<Position>();
+            bfs.Search(myMaze);
+            ISearcher<Position> dfs = new Dfs<Position>();
+            dfs.Search(myMaze);
+            Console.WriteLine(bfs.GetNumberOfNodesEvaluated());
+            Console.WriteLine(dfs.GetNumberOfNodesEvaluated());
+            Console.ReadKey();
         }
+        
     }
 }

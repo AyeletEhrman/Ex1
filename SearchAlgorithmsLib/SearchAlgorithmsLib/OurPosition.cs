@@ -6,12 +6,12 @@ namespace SearchAlgorithmsLib
 {
     class OurPosition
     {
-        private int row { get; set; }
-        private int col { get; set; }
+        private int Row { get; set; }
+        private int Col { get; set; }
 
         public bool Equals(OurPosition pos)
         {
-            return ((this.row == pos.row) && (this.col == pos.col));
+            return ((this.Row == pos.Row) && (this.Col == pos.Col));
         }
 
         /*  public override bool Equals(object obj)
@@ -21,7 +21,7 @@ namespace SearchAlgorithmsLib
 
         public override string ToString()
         {
-            return row.ToString() + col.ToString();
+            return Row.ToString() + Col.ToString();
         }
     }
 }

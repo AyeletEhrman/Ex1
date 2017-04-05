@@ -7,23 +7,31 @@ namespace SearchAlgorithmsLib
     public class State<T>
     {
         public T state { get; set; } // the state represented by a string
-        public double cost { get; set; } // cost to reach this state (set by a setter)
+      //  public float orgCost { get; set; } // original cost
+        public float cost { get; set; } // cost to reach this state (set by a setter)
         public State<T> cameFrom { get; set; } // the state we came from to this state (setter)
 
-        public State(T state, double cost) // CTOR
+        public State(T state) // CTOR
         {
             this.state = state;
-            this.cost = cost;
+         //   this.orgCost = orgCost;
+            this.cost = 0;
+            this.cameFrom = null;
         }
 
-        public bool Equals(State<T> s) // we overload Object's Equals method
+       /* public bool Equals(State<T> s) // we overload Object's Equals method
         {
             return state.Equals(s.state);
+        }*/
+        public override bool Equals(object obj)
+        {
+            return state.Equals((obj as State<T>).state);
         }
 
         public override int GetHashCode()
         {
-            return (state.ToString() + cost.ToString()).GetHashCode();
+            // return (state.ToString() + cost.ToString()).GetHashCode();
+            return state.ToString().GetHashCode();
         }
         // ...
     }
