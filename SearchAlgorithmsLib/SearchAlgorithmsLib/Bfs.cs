@@ -8,7 +8,7 @@ namespace SearchAlgorithmsLib
 {
     public class Bfs<T> : Searcher<T>
     {
-        public override List<State<T>> Search(ISearchable<T> searchable)
+        public override Solution<State<T>> Search(ISearchable<T> searchable)
         { // Searcher's abstract method overriding
             AddToOpenList(searchable.GetInitialState()); // inherited from Searcher
             HashSet<State<T>> closed = new HashSet<State<T>>();
@@ -44,9 +44,9 @@ namespace SearchAlgorithmsLib
                     }
                 }
             }
-            return new List<State<T>>();//?????????????
+            return new Solution<State<T>>();//?????????????
         }
-        private List<State<T>> BackTrace(State<T> st)
+        private Solution<State<T>> BackTrace(State<T> st)
         {
             List<State<T>> trace = new List<State<T>>();
             do
@@ -54,8 +54,9 @@ namespace SearchAlgorithmsLib
                 trace.Add(st);
                 st = st.cameFrom;
             } while (st != null);
-
-            return trace;
+            Solution<State<T>> sol = new Solution<State<T>>();
+            sol.SolLst = trace;
+            return sol;
         }
        
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MazeLib;
 using SearchAlgorithmsLib;
 
-namespace Server
+namespace ServerProject
 {
     class MazeModel : IModel<Maze>
     {

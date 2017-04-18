@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server
+namespace ServerProject
 {
-    class ServerMain
+    class CloseCommand : ICommand
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }

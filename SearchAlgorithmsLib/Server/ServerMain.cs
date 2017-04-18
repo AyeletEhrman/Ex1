@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server
+namespace ServerProject
 {
-    class StartGameCommand : ICommand
+    class ServerMain
     {
-    }
+        static void Main(string[] args)
+        {
+        }
 }

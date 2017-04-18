@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server
+namespace ServerProject
 {
-    class CloseCommand : ICommand
+    class StartGameCommand : ICommand
     {
     }
 }

@@ -58,6 +58,7 @@ namespace Main
                 if (maze[s.state.Row, s.state.Col - 1] == 0)
                 {
                     State<Position> st = new State<Position>(new Position(s.state.Row, s.state.Col - 1));
+                 
                     st.cameFrom = s;
                     posSt.Add(st);
                 }

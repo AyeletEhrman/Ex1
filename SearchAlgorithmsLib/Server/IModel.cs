@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server
+namespace ServerProject
 {
-    class SolveMazeCommand : ICommand
+    interface IModel<T>
     {
+        T Generate(int x, int y);
+        string Solve(T problem, int searcher);
     }
 }

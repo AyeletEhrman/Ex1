@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server
+namespace SearchAlgorithmsLib
 {
-    class Program
+    public class Solution<T>
     {
-        static void Main(string[] args)
-        {
-        }
+        public List<T> SolLst { get; set; }
     }
 }

@@ -32,7 +32,18 @@ namespace SearchAlgorithmsLib
         {
             // return (state.ToString() + cost.ToString()).GetHashCode();
             return state.ToString().GetHashCode();
+            //return state.GetHashCode();
         }
         // ...
-    }
+    } /*   public static class StatePool<T>
+    {
+        private static HashSet<State<T>> pool = new HashSet<State<T>>();
+        private static HashSet<T> posPool = new HashSet<T>();
+        public static State<T> getState(T newSt)
+        {
+            if (pool.Contains()) { }
+
+            return pool.get(newSt);
+        }
+    }*/
 }

@@ -44,6 +44,6 @@ namespace SearchAlgorithmsLib
         {
             return evaluatedNodes;
         }
-        public abstract List<State<T>> Search(ISearchable<T> searchable);
+        public abstract Solution<State<T>> Search(ISearchable<T> searchable);
     }
 }

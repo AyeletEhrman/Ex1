@@ -19,7 +19,7 @@ namespace Main
         public static void CompareSolvers()
         {
             IMazeGenerator gen = new DFSMazeGenerator();
-            Maze maze = gen.Generate(50, 50);
+            Maze maze = gen.Generate(10, 10);
             Console.Write(maze);
             ISearchable<Position> myMaze = new MazeSearchable(maze);
             ISearcher<Position> bfs = new Bfs<Position>();

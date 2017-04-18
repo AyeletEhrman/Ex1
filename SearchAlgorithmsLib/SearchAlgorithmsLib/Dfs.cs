@@ -10,7 +10,7 @@ namespace SearchAlgorithmsLib
     {
         private int evaluatedNodes;
 
-        public List<State<T>> Search(ISearchable<T> searchable)
+        public Solution<State<T>> Search(ISearchable<T> searchable)
         {
             evaluatedNodes = 0;
             Stack <State<T>> stack = new Stack<State<T>>();
@@ -37,7 +37,7 @@ namespace SearchAlgorithmsLib
                     }
                 }
             }
-            return new List<State<T>>();
+            return new Solution<State<T>>();
         }
         // get how many nodes were evaluated by the algorithm
         public int GetNumberOfNodesEvaluated()
@@ -45,7 +45,7 @@ namespace SearchAlgorithmsLib
             return evaluatedNodes;
         }
 
-        private List<State<T>> BackTrace(State<T> st)
+        private Solution<State<T>> BackTrace(State<T> st)
         {
             List<State<T>> trace = new List<State<T>>();
             do
@@ -53,8 +53,9 @@ namespace SearchAlgorithmsLib
                 trace.Add(st);
                 st = st.cameFrom;
             } while (st != null);
-
-            return trace;
+            Solution<State<T>> sol = new Solution<State<T>>();
+            sol.SolLst = trace;
+            return sol;
         }
     }
 }
