@@ -10,5 +10,6 @@ namespace ServerProject
     interface IController
     {
         string ExecuteCommand(string commandLine, TcpClient client);
+     //   void NotifyGenerated(string name);
     }
 }

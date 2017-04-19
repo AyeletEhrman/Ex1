@@ -12,7 +12,21 @@ namespace ServerProject
     {
         private Dictionary<string, ICommand> commands;
         private IModel<Maze> model;
-        public MazeController()
+        private IClientHandler clientHandler;
+        public MazeController(IModel<Maze> md, IClientHandler ch)
+        {
+            model = md;
+            clientHandler = ch;
+            commands = new Dictionary<string, ICommand>();
+            commands.Add("generate", new GenerateMazeCommand(model));
+            commands.Add("solve", new SolveMazeCommand(model));
+            commands.Add("start", new StartGameCommand());
+            commands.Add("list", new ShowListCommand());
+            commands.Add("join", new JoinCommand());
+            commands.Add("play", new PlayCommand());
+            commands.Add("close", new CloseCommand());
+        }
+     /*   public MazeController()
         {
             model = new MazeModel();
             commands = new Dictionary<string, ICommand>();
@@ -23,16 +37,26 @@ namespace ServerProject
             commands.Add("join", new JoinCommand());
             commands.Add("play", new PlayCommand());
             commands.Add("close", new CloseCommand());
-        }
+        }*/
+
         public string ExecuteCommand(string commandLine, TcpClient client)
         {
-            string[] arr = commandLine.Split(' ');
-            string commandKey = arr[0];
-            if (!commands.ContainsKey(commandKey))
-                return "Command not found";
-            string[] args = arr.Skip(1).ToArray();
-            ICommand command = commands[commandKey];
-            return command.Execute(args, client);
-        }
+            try
+            {
+                string[] arr = commandLine.Split(' ');
+                string commandKey = arr[0];
+                if (!commands.ContainsKey(commandKey))
+                    return "Command not found";
+                string[] args = arr.Skip(1).ToArray();
+                ICommand command = commands[commandKey];
+                return command.Execute(args, client);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return "error occured";
+            }
+           
+        }
     }
 }

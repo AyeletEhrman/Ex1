@@ -9,6 +9,7 @@ namespace ServerProject
 {
     interface IClientHandler
     {
+        void SetController(IController controller);
         void HandleClient(TcpClient client);
     }
 }

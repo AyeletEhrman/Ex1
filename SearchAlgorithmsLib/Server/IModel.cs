@@ -8,7 +8,9 @@ namespace ServerProject
 {
     interface IModel<T>
     {
-        T Generate(int x, int y);
-        string Solve(T problem, int searcher);
+        void SetController(IController cont);
+        T Generate(string name, int x, int y);
+     //   T GetGeneratedObj();
+        string Solve(string name, int searcher);
     }
 }

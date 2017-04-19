@@ -11,22 +11,42 @@ namespace ServerProject
     class ClientHandler : IClientHandler
     {
         private IController cont;
-        public ClientHandler(IController icont)
+        public ClientHandler()//IController icont)
         {
-            cont = icont;
+            //cont = icont;
+        }
+        public void SetController(IController controller)
+        {
+            cont = controller;
         }
         public void HandleClient(TcpClient client)
         {
             new Task(() =>
             {
                 using (NetworkStream stream = client.GetStream())
-                using (StreamReader reader = new StreamReader(stream))
-                using (StreamWriter writer = new StreamWriter(stream))
+                using (BinaryReader reader = new BinaryReader(stream))
+                using (BinaryWriter writer = new BinaryWriter(stream))
                 {
-                    string commandLine = reader.ReadLine();
-                    Console.WriteLine("Got command: {0}", commandLine);
-                    string result = cont.ExecuteCommand(commandLine, client);
-                    writer.Write(result);
+                    while (true)
+                    {
+                        Console.WriteLine("insert command on client");
+                        try
+                        {
+                            string commandLine = reader.ReadString();
+                            Console.WriteLine("Got command: {0}", commandLine);
+
+
+
+                            string result = cont.ExecuteCommand(commandLine, client);
+                            writer.Write(result);
+                            writer.Flush();
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            break;
+                        }
+                    }
                 }
                 client.Close();
             }).Start();
