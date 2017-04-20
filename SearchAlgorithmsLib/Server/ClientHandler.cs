@@ -48,7 +48,9 @@ namespace ServerProject
                         }
                     }
                 }
+                // closes the cient socket.
                 client.Close();
+                // then what happens
             }).Start();
         }
     }
