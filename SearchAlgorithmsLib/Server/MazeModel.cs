@@ -88,19 +88,19 @@ namespace ServerProject
             string strSol = " ";
             for (int i = solution.SolLst.Count - 1; i > 0; i--)
             {
-                if (solution.SolLst[i].state.Row > solution.SolLst[i - 1].state.Row)
+                if (solution.SolLst[i].StateType.Row > solution.SolLst[i - 1].StateType.Row)
                 {
                     strSol += "2";
                 }
-                else if (solution.SolLst[i].state.Row < solution.SolLst[i - 1].state.Row)
+                else if (solution.SolLst[i].StateType.Row < solution.SolLst[i - 1].StateType.Row)
                 {
                     strSol += "3";
                 }
-                else if (solution.SolLst[i].state.Col > solution.SolLst[i - 1].state.Col)
+                else if (solution.SolLst[i].StateType.Col > solution.SolLst[i - 1].StateType.Col)
                 {
                     strSol += "0";
                 }
-                else if (solution.SolLst[i].state.Col < solution.SolLst[i - 1].state.Col)
+                else if (solution.SolLst[i].StateType.Col < solution.SolLst[i - 1].StateType.Col)
                 {
                     strSol += "1";
                 }
