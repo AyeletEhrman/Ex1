@@ -15,11 +15,11 @@ namespace ServerProject
         {
             this.model = model;
         }
-        public string Execute(string[] args, TcpClient client)
+        public TaskResult Execute(string[] args, TcpClient client)
         {
             if (args.Length != 3)
             {
-                return "bad args";
+                return new TaskResult("bad args", false);
             }
             try
             {
@@ -27,12 +27,12 @@ namespace ServerProject
                 int rows = int.Parse(args[1]);
                 int cols = int.Parse(args[2]);
                 Maze maze = model.Generate(name, rows, cols);
-                return maze.ToJSON();
+                return new TaskResult(maze.ToJSON(), false);
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
-                return "error occured";
+                return new TaskResult("error occured", false);
             }
         }
     }

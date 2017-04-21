@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Sockets;
 
 namespace ServerProject
 {
@@ -10,7 +6,10 @@ namespace ServerProject
     {
         void SetController(IController cont);
         T Generate(string name, int x, int y);
-     //   T GetGeneratedObj();
         string Solve(string name, int searcher);
+        T Start(TcpClient client, string name, int x, int y);
+        T Join(TcpClient client, string name);
+        string List();
+        MultiPlayerGame GetGame(TcpClient player);
     }
 }

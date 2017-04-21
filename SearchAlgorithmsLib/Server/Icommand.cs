@@ -9,7 +9,7 @@ namespace ServerProject
 {
     interface ICommand
     {
-        string Execute(string[] args, TcpClient client = null);
+        TaskResult Execute(string[] args, TcpClient client = null);
         //Some commands need the TcpClient object to send messages back to the client
     }
 }

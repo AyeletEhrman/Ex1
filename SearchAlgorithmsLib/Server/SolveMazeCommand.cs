@@ -15,23 +15,23 @@ namespace ServerProject
         {
             this.model = model;
         }
-        public string Execute(string[] args, TcpClient client)
+        public TaskResult Execute(string[] args, TcpClient client)
         {
             if (args.Length != 2)
             {
-                return "bad args";
+                return new TaskResult("bad args", false);
             }
             try { 
                 string name = args[0];
                 int algo = int.Parse(args[1]);
                 string solution = model.Solve(name, algo);
-                return solution;
+                return new TaskResult(solution, false);
             }
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
-                return "error occured";
+                return new TaskResult("error occured", false);
             }
-}
+        }
     }
 }

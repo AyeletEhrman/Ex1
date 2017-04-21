@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ServerProject
@@ -11,9 +8,8 @@ namespace ServerProject
     class ClientHandler : IClientHandler
     {
         private IController cont;
-        public ClientHandler()//IController icont)
+        public ClientHandler()
         {
-            //cont = icont;
         }
         public void SetController(IController controller)
         {
@@ -29,17 +25,38 @@ namespace ServerProject
                 {
                     while (true)
                     {
-                        Console.WriteLine("insert command on client");
                         try
                         {
                             string commandLine = reader.ReadString();
+                            if (commandLine.Equals("game over"))
+                            {
+                                break;
+                            }
+                            string type = cont.CommandType(commandLine);
+                            writer.Write(type);
+
                             Console.WriteLine("Got command: {0}", commandLine);
 
-
-
-                            string result = cont.ExecuteCommand(commandLine, client);
-                            writer.Write(result);
-                            writer.Flush();
+                            TaskResult result = cont.ExecuteCommand(commandLine, client);
+                            if (result.JsonSol == null)
+                            {
+                                writer.Write("error occured");
+                                writer.Flush();
+                                break;
+                            }
+                            else if (!result.JsonSol.Equals(""))
+                            {
+                                writer.Write(result.JsonSol);
+                                writer.Flush();
+                            }
+                            if (result.JsonSol.Equals("disconnect"))
+                            {
+                                break;
+                            }
+                                if (!type.Equals("multi"))
+                            {
+                                break;
+                            }
                         }
                         catch (Exception e)
                         {
@@ -50,8 +67,22 @@ namespace ServerProject
                 }
                 // closes the cient socket.
                 client.Close();
-                // then what happens
             }).Start();
+        }
+
+        public void SendMessage(TcpClient client, string message)
+        {
+            NetworkStream stream = client.GetStream();
+            BinaryWriter writer = new BinaryWriter(stream);
+            try
+            {
+                writer.Write(message);
+                writer.Flush();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

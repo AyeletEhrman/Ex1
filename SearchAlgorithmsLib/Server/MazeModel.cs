@@ -1,46 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MazeLib;
 using SearchAlgorithmsLib;
 using MazeGeneratorLib;
 using Main;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net.Sockets;
 
 namespace ServerProject
 {
     class MazeModel : IModel<Maze>
     {
-        private Dictionary<string, Maze> mazes;
-        private Dictionary<string, string> solvedMazes;
         private IController controller;
+        private Dictionary<string, Maze> singleMazes;
+        private Dictionary<string, string> solvedMazes;
+        private Dictionary<string, Maze> toJoinMazes;
+        private Dictionary<string, MultiPlayerGame> multiGames;
+        private Dictionary<string, Maze> playingMazes;
+
         public MazeModel()
         {
-            mazes = new Dictionary<string, Maze>();
+            singleMazes = new Dictionary<string, Maze>();
             solvedMazes = new Dictionary<string, string>();
+            toJoinMazes = new Dictionary<string, Maze>();
+            multiGames = new Dictionary<string, MultiPlayerGame>();
+            playingMazes = new Dictionary<string, Maze>();
         }
+
+        public void SetController(IController cont)
+        {
+            controller = cont;
+        }
+
         public Maze Generate(string name, int x, int y)
         {
-            if (!mazes.ContainsKey(name))
+             // override the old maze if exists.
+            if (singleMazes.ContainsKey(name))
             {
-                IMazeGenerator gen = new DFSMazeGenerator();
-                Maze maze = gen.Generate(x, y);
-                maze.Name = name;
-                mazes.Add(name, maze);
+                singleMazes.Remove(name);
+                if (solvedMazes.ContainsKey(name))
+                {
+                    solvedMazes.Remove(name);
+                }
             }
-            return mazes[name];
-           // controller.NotifyGenerated(name);
+            IMazeGenerator gen = new DFSMazeGenerator();
+            Maze maze = gen.Generate(x, y);
+            maze.Name = name;
+            singleMazes.Add(name, maze);
+            return singleMazes[name];
         }
-       /* public Maze GetGeneratedObj(string name)
-        {
-            return mazes[name];
-        }*/
+
         public string Solve(string name, int searcher)
         {
-            if (!mazes.ContainsKey(name))
+            if (!singleMazes.ContainsKey(name))
             {
                 return "maze not found";
             }
@@ -54,11 +67,12 @@ namespace ServerProject
             }
             return solvedMazes[name];
         }
+
         private void AddSolution(string name, int searcher)
         {
             Solution<State<Position>> solution = new Solution<State<Position>>();
             int nodesEv = 0;
-            ISearchable<Position> srMaze = new MazeSearchable(mazes[name]);
+            ISearchable<Position> srMaze = new MazeSearchable(singleMazes[name]);
              if (searcher == 0)
             {
                 ISearcher<Position> bfs = new Bfs<Position>();
@@ -96,12 +110,64 @@ namespace ServerProject
             sol.Add("Solution", strSol);
             sol.Add("NodesEvaluated", nodesEv);
             string Jsol = JsonConvert.SerializeObject(sol);
+
+             JsonConvert.DeserializeObject(Jsol);
+
             solvedMazes.Add(name, Jsol);
         }
-        public void SetController(IController cont)
+
+        public Maze Start(TcpClient client, string name, int x, int y)
         {
-            controller = cont;
+            if (toJoinMazes.ContainsKey(name))
+            {
+                // error.
+                return null;
+            }
+            IMazeGenerator gen = new DFSMazeGenerator();
+            Maze maze = gen.Generate(x, y);
+            maze.Name = name;
+            toJoinMazes.Add(name, maze);
+
+            MultiPlayerGame game = new MultiPlayerGame(client, name);
+            multiGames.Add(name, game);
+            game.WaitForJoin();
+            // we got another player.
+            return playingMazes[name];
         }
-    
+
+        public Maze Join(TcpClient client, string name)
+        {
+            if (!toJoinMazes.ContainsKey(name))
+            {
+                // error. we dont have such game available.
+                return null;
+            }
+            playingMazes.Add(name, toJoinMazes[name]);
+            toJoinMazes.Remove(name);
+
+            multiGames[name].SetSecondPlayer(client);
+            
+            return playingMazes[name];
+        }
+
+        public string List()
+        {
+            JArray Jsol = new JArray(toJoinMazes.Keys);
+            return Jsol.ToString();
+        }
+
+        public MultiPlayerGame GetGame(TcpClient player)
+        {
+            MultiPlayerGame game = null;
+            for (int i = 0; i < multiGames.Count; i++)
+            {
+                game = multiGames.ElementAt(i).Value;
+                if (game.IsPlayer(player))
+                {
+                    return game;
+                }
+            }
+            return null;
+        }
     }
 }

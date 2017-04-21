@@ -14,26 +14,9 @@ namespace ClientProject
         static void Main(string[] args)
         {
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1116);
-            TcpClient client = new TcpClient();
-            client.Connect(ep);
-            Console.WriteLine("You are connected");
-
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryReader reader = new BinaryReader(stream))
-            using (BinaryWriter writer = new BinaryWriter(stream))
-            {
-                while (true)
-                {
-                    Console.WriteLine("insert command");
-                    string commandLine = Console.ReadLine();
-                    writer.Write(commandLine);
-                    writer.Flush();
-
-                    Console.WriteLine("wait for result");
-                    string result = reader.ReadString();
-                    Console.WriteLine(result);
-                }
-            }
+            Client client = new Client(ep);
+            client.Start();
+            Console.ReadKey();
         }
     }
 }

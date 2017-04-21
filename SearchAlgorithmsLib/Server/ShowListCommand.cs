@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MazeLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -9,9 +10,14 @@ namespace ServerProject
 {
     class ShowListCommand : ICommand
     {
-        public string Execute(string[] args, TcpClient client = null)
+        private IModel<Maze> model;
+        public ShowListCommand(IModel<Maze> model)
         {
-            return null;
+            this.model = model;
+        }
+        public TaskResult Execute(string[] args, TcpClient client = null)
+        {
+            return new TaskResult(model.List(), false);
         }
     }
 }
