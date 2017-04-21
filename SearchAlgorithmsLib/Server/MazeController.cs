@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using MazeLib;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServerProject
 {
@@ -62,7 +60,6 @@ namespace ServerProject
                 Console.WriteLine(e.Message);
                 return new TaskResult("error occured", false);
             }
-           
         }
     }
 }
