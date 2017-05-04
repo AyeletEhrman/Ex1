@@ -1,6 +1,10 @@
 ﻿using System.Net.Sockets;
+
 namespace ServerProject
 {
+    /// <summary>
+    /// client handler interface (view) of the MVC.
+    /// </summary>
     interface IClientHandler
     {
         void SetController(IController controller);

@@ -112,6 +112,7 @@ namespace ServerProject
                 writer.Write(message);
                 writer.Flush();
             }
+            // error sending.
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);

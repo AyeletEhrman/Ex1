@@ -2,8 +2,8 @@
 using System;
 using System.Net.Sockets;
 
-namespace ServerProject
-{
+    namespace ServerProject
+    { 
     /// <summary>
     /// class for the closing command.
     /// </summary>

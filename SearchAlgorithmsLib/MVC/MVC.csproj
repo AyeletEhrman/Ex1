@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F188DE86-458E-4E07-82DF-1B3967815EF5}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>ServerProject</RootNamespace>
-    <AssemblyName>ServerProject</AssemblyName>
+    <ProjectGuid>{9EE5D792-B116-43FC-958F-F7F5AD48469E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MVC</RootNamespace>
+    <AssemblyName>MVC</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,12 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MazeGeneratorLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MazeGeneratorLib">
       <HintPath>..\..\..\..\..\Desktop\MazeGeneratorLib.dll</HintPath>
     </Reference>
-    <Reference Include="MazeLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MazeLib">
       <HintPath>..\..\..\..\..\Desktop\MazeLib.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -53,47 +49,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientHandler.cs" />
-    <Compile Include="CloseCommand.cs" />
-    <Compile Include="GenerateMazeCommand.cs" />
-    <Compile Include="IClientHandler.cs" />
-    <Compile Include="ICommand.cs" />
-    <Compile Include="IController.cs" />
-    <Compile Include="IModel.cs" />
-    <Compile Include="JoinCommand.cs" />
-    <Compile Include="MazeController.cs" />
-    <Compile Include="MazeModel.cs" />
-    <Compile Include="MultiPlayerGame.cs" />
-    <Compile Include="PlayCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server.cs" />
-    <Compile Include="ServerMain.cs" />
-    <Compile Include="ShowListCommand.cs" />
-    <Compile Include="SolveMazeCommand.cs" />
-    <Compile Include="StartGameCommand.cs" />
-    <Compile Include="TaskResult.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Client\ClientProject.csproj">
-      <Project>{7c6ab9e3-4c30-4834-86fe-37be74728895}</Project>
-      <Name>ClientProject</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Main\Main.csproj">
       <Project>{825131d4-6226-470d-8bdc-7b38906b14e0}</Project>
       <Name>Main</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MVC\MVC.csproj">
-      <Project>{9ee5d792-b116-43fc-958f-f7f5ad48469e}</Project>
-      <Name>MVC</Name>
     </ProjectReference>
     <ProjectReference Include="..\SearchAlgorithmsLib\SearchAlgorithmsLib.csproj">
       <Project>{8745d291-7345-48a4-9cc0-e1138aafa480}</Project>
       <Name>SearchAlgorithmsLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
