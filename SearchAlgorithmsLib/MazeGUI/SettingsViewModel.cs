@@ -9,30 +9,46 @@ namespace MazeGUI
     class SettingsViewModel : ViewModel
     {
         private ISettingsModel model;
-        public SettingsViewModel(ISettingsModel model)
-        {
+        public SettingsViewModel(ISettingsModel model) {
             this.model = model;
         }
-        public string ServerIP
-        {
+        public string ServerIP {
             get { return model.ServerIP; }
-            set
-            {
+            set {
                 model.ServerIP = value;
                 NotifyPropertyChanged("ServerIP");
             }
         }
-        public int ServerPort
-        {
+        public int ServerPort {
             get { return model.ServerPort; }
-            set
-            {
+            set {
                 model.ServerPort = value;
                 NotifyPropertyChanged("ServerPort");
             }
         }
- …
- public void SaveSettings()
+        
+        public int MazeRows {
+            get { return model.MazeRows; }
+            set {
+                model.MazeRows = value;
+                NotifyPropertyChanged("MazeRows");
+            }
+        }
+        public int MazeCols {
+            get { return model.MazeCols; }
+            set {
+                model.MazeCols = value;
+                NotifyPropertyChanged("MazeCols");
+            }
+        }
+        public int SearchAlgorithm {
+            get { return model.SearchAlgorithm; }
+            set {
+                model.SearchAlgorithm = value;
+                NotifyPropertyChanged("SearchAlgorithm");
+            }
+        }
+        public void SaveSettings()
         {
             model.SaveSettings();
         }

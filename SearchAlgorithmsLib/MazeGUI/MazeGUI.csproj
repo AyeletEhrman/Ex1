@@ -54,14 +54,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationMultiModel.cs" />
     <Compile Include="ApplicationSettingsModel.cs" />
+    <Compile Include="ApplicationSingleModel.cs" />
     <Compile Include="controls\MazeInfo.xaml.cs">
       <DependentUpon>MazeInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IModel.cs" />
+    <Compile Include="IMultiModel.cs" />
     <Compile Include="ISettingsModel.cs" />
+    <Compile Include="ISingleModel.cs" />
     <Compile Include="MultiPlayerMenu.xaml.cs">
       <DependentUpon>MultiPlayerMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MultiViewModel.cs" />
     <Compile Include="SettingsMenu.xaml.cs">
       <DependentUpon>SettingsMenu.xaml</DependentUpon>
     </Compile>
@@ -72,6 +78,7 @@
     <Compile Include="SinglePlayerWindow.xaml.cs">
       <DependentUpon>SinglePlayerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SingleViewModel.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="controls\Maze.xaml">
       <SubType>Designer</SubType>

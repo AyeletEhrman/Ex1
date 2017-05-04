@@ -19,9 +19,13 @@ namespace MazeGUI
     /// </summary>
     public partial class SinglePlayerMenu : Window
     {
+        private SingleViewModel svm;
         public SinglePlayerMenu()
         {
             InitializeComponent();
+            ISingleModel sm = new ApplicationSingleModel();
+            svm = new SingleViewModel(sm);
+            this.DataContext = svm;
         }
     }
 }

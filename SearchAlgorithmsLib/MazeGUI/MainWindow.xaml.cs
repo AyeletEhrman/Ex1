@@ -33,18 +33,22 @@ namespace MazeGUI
         private void SingleBtn_Click(object sender, RoutedEventArgs e)
         {
             SinglePlayerMenu menu = new SinglePlayerMenu();
+            menu.Owner = this;
+            
             menu.ShowDialog();
         }
 
         private void MultiBtn_Click(object sender, RoutedEventArgs e)
         {
             MultiPlayerMenu menu = new MultiPlayerMenu();
+            menu.Owner = this;
             menu.ShowDialog();
         }
 
         private void SettingsBtn_Click(object sender, RoutedEventArgs e)
         {
             SettingsMenu menu = new SettingsMenu();
+            menu.Owner = this;
             menu.ShowDialog();
         }
     }

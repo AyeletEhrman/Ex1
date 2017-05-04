@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MazeGUI"
         mc:Ignorable="d"
-        Title="Settings" Height="300" Width="300">
+        Title="Settings" Height="300" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid TextBlock.FontSize="14">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,15 +21,15 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="1" Margin="10">Server IP:</TextBlock>
-        <TextBox x:Name="txtIP" Grid.Row="1" Margin="10" Grid.Column="1" Text="{Binding ServerIP}"></TextBox>
+        <TextBox x:Name="txtIP" Grid.Row="1" Margin="10" Grid.Column="1" Text="{Binding ServerIP, UpdateSourceTrigger=LostFocus}"></TextBox>
         <TextBlock Grid.Row="2" Margin="10">Server Port:</TextBlock>
-        <TextBox x:Name="txtPort" Grid.Row="2" Grid.Column="1" Margin="10" Text="{Binding ServerPort}"></TextBox>
+        <TextBox x:Name="txtPort" Grid.Row="2" Grid.Column="1" Margin="10" Text="{Binding ServerPort, UpdateSourceTrigger=LostFocus}"></TextBox>
         <TextBlock Grid.Row="3" Margin="10">Maze rows:</TextBlock>
-        <TextBox x:Name="txtRows" Grid.Row="3" Grid.Column="1" Margin="10" Text="{Binding MazeRows}"></TextBox>
+        <TextBox x:Name="txtRows" Grid.Row="3" Grid.Column="1" Margin="10" Text="{Binding MazeRows, UpdateSourceTrigger=LostFocus}"></TextBox>
         <TextBlock Grid.Row="4" Margin="10">Maze columns:</TextBlock>
-        <TextBox x:Name="txtCols" Grid.Row="4" Grid.Column="1" Margin="10" Text="{Binding MazeCols}"></TextBox>
+        <TextBox x:Name="txtCols" Grid.Row="4" Grid.Column="1" Margin="10" Text="{Binding MazeCols, UpdateSourceTrigger=LostFocus}"></TextBox>
         <TextBlock Grid.Row="5" Margin="10">Search algorithm:</TextBlock>
-        <ComboBox x:Name="cboSearchAlgo" Grid.Row="5" Grid.Column="1" Margin="10" HorizontalAlignment="Left" SelectedIndex="{Binding SearchAlgorithm}" IsEditable="False" Width="55">
+        <ComboBox x:Name="cboSearchAlgo" Grid.Row="5" Grid.Column="1" Margin="10" HorizontalAlignment="Left" SelectedIndex="{Binding SearchAlgorithm, UpdateSourceTrigger=LostFocus}" IsEditable="False" Width="55">
             <ComboBoxItem>BFS</ComboBoxItem>
             <ComboBoxItem>DFS</ComboBoxItem>
         </ComboBox>

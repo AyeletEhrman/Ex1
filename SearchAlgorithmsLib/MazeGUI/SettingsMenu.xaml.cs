@@ -23,7 +23,8 @@ namespace MazeGUI
         public SettingsMenu()
         {
             InitializeComponent();
-            vm = new SettingsViewModel();
+            ISettingsModel sm = new ApplicationSettingsModel();
+            vm = new SettingsViewModel(sm);
             this.DataContext = vm;
         }
         private void OKBtn_Click(object sender, RoutedEventArgs e)

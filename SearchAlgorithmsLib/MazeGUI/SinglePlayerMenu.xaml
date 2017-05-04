@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MazeGUI"
         mc:Ignorable="d"
-        Title="SinglePlayerMenu" Height="175" Width="300">
+        Title="SinglePlayerMenu" Height="175" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid>
         <Controls:MazeInfo />
     </Grid>

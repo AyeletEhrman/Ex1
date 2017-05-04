@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MazeGUI"
         mc:Ignorable="d"
         xmlns:Controls= "clr-namespace:MazeGUI.controls"
-        Title="MainWindow" Height="350" Width="500" Icon="resources/icon.ico">
+        Title="MainWindow" Height="350" Width="500" Icon="resources/icon.ico" WindowStartupLocation="CenterScreen">
     <Viewbox>
     <Grid>
         <Image Source="resources\colorfulMaze.jpg" HorizontalAlignment="Left" Height="320" Margin="0,0,0,0" VerticalAlignment="Top" Width="500"/>
