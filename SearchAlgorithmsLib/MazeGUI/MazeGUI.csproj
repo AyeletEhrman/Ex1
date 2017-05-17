@@ -57,6 +57,9 @@
     <Compile Include="ApplicationMultiModel.cs" />
     <Compile Include="ApplicationSettingsModel.cs" />
     <Compile Include="ApplicationSingleModel.cs" />
+    <Compile Include="controls\MazeBoard.xaml.cs">
+      <DependentUpon>MazeBoard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="controls\MazeInfo.xaml.cs">
       <DependentUpon>MazeInfo.xaml</DependentUpon>
     </Compile>
@@ -80,7 +83,7 @@
     </Compile>
     <Compile Include="SingleViewModel.cs" />
     <Compile Include="ViewModel.cs" />
-    <Page Include="controls\Maze.xaml">
+    <Page Include="controls\MazeBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -95,9 +98,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="controls\Maze.xaml.cs">
-      <DependentUpon>Maze.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
