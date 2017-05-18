@@ -8,9 +8,9 @@
         xmlns:controls="clr-namespace:MazeGUI.controls"
         Height="650" Width="600" WindowStartupLocation="CenterScreen">
     <Grid>
-        <controls:MazeBoard x:Name="mazeBoard" Rows="5" Cols="5"
-            Maze="1,0,1,0,0,0,1,0,1,1,1,1,1,0,0,1,0,0,0,1,1,0,1,1,0" InitialPos="0,1"
-            GoalPos="2,3" PlayerImageFile="minion.png" ExitImageFile="exit.png" Grid.Row="1"
+        <controls:MazeBoard x:Name="mazeBoard" Rows="{Binding MazeRows}" Cols="{Binding MazeCols}"
+            Maze="{Binding MazeStr}" InitialPos="{Binding Initial}"
+            GoalPos="{Binding Goal}" CurrentPos="{Bindibg Current}"  MazeName="{Binding Name}" PlayerImageFile="minion.png" ExitImageFile="exit.png" Grid.Row="1"
             Margin="10">
         </controls:MazeBoard>
     </Grid>

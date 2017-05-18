@@ -34,6 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MazeGeneratorLib">
+      <HintPath>..\..\..\..\..\Desktop\MazeGeneratorLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MazeLib">
+      <HintPath>..\..\..\..\..\Desktop\MazeLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -75,6 +81,7 @@
       <DependentUpon>SettingsMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingsViewModel.cs" />
+    <Compile Include="SingleGameModel.cs" />
     <Compile Include="SinglePlayerMenu.xaml.cs">
       <DependentUpon>SinglePlayerMenu.xaml</DependentUpon>
     </Compile>
@@ -82,6 +89,7 @@
       <DependentUpon>SinglePlayerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SingleViewModel.cs" />
+    <Compile Include="SingleWindowViewModel.cs" />
     <Compile Include="ViewModel.cs" />
     <Page Include="controls\MazeBoard.xaml">
       <SubType>Designer</SubType>
