@@ -35,7 +35,7 @@ namespace MazeGUI.controls
            DependencyProperty.Register("Cols", typeof(int), typeof(MazeBoard), new PropertyMetadata(0));
 
         public static readonly DependencyProperty MazeProperty =
-           DependencyProperty.Register("Maze", typeof(string), typeof(MazeBoard));
+           DependencyProperty.Register("Maze", typeof(string), typeof(MazeBoard), new PropertyMetadata(OnMazePropertyChanged));
 
         public static readonly DependencyProperty MazeNameProperty =
            DependencyProperty.Register("MazeName", typeof(string), typeof(MazeBoard));
@@ -85,10 +85,10 @@ namespace MazeGUI.controls
             get { return (Position)GetValue(CurrentPosProperty); }
             set { SetValue(CurrentPosProperty, value); }
         }
-       
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
 
+        private static void OnMazePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((MazeBoard)d).DrawMaze();
         }
 
         public void DrawMaze()

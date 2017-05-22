@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace MazeGUI
 {
-    class SingleGameModel : /*NotifyChanges,*/ ISingleGameModel
+    class SingleGameModel : INotifyPropertyChanged, /*NotifyChanges,*/ ISingleGameModel
     {
         // has Client
         Client client;

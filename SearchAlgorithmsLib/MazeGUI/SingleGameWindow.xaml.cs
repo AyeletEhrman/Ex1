@@ -26,12 +26,15 @@ namespace MazeGUI
             ISingleGameModel sm = new SingleGameModel();
             sgvm = new SingleGameViewModel(sm);
             this.DataContext = sgvm;
+            mazeBoard.DataContext = sgvm;
         }
 
         public void Generate(string name, string rows, string cols)
         {
+            this.Show();
             sgvm.Generate(name, rows, cols);
             mazeBoard.DrawMaze();
+            
         }
 
         private void mazeBoard_Loaded(object sender, RoutedEventArgs e)
