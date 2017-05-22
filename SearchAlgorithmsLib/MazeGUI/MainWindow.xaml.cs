@@ -32,7 +32,7 @@ namespace MazeGUI
 
         private void SingleBtn_Click(object sender, RoutedEventArgs e)
         {
-            SinglePlayerMenu menu = new SinglePlayerMenu();
+            SingleGameMenu menu = new SingleGameMenu();
             menu.Owner = this;
             
             menu.ShowDialog();

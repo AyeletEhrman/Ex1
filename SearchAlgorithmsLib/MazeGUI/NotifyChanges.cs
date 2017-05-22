@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 
 namespace MazeGUI
 {
-    abstract class ViewModel : INotifyPropertyChanged
+    public abstract class NotifyChanges : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+            if (PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+          //  this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
 }

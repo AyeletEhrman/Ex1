@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MazeGUI
 {
-    class SingleViewModel : ViewModel
+    class SingleMenuViewModel : NotifyChanges
     {
-        private ISingleModel model;
-        public SingleViewModel(ISingleModel model)
+        private ISingleMenuModel model;
+        public SingleMenuViewModel(ISingleMenuModel model)
         {
             this.model = model;
         }
@@ -47,6 +47,11 @@ namespace MazeGUI
         public void SaveSettings()
         {
             model.SaveSettings();
+        }
+
+        public void Generate(string name, string rows, string cols)
+        {
+            model.Generate(name, rows, cols);
         }
     }
 }

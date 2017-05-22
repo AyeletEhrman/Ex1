@@ -19,12 +19,12 @@ namespace MazeGUI
     /// </summary>
     public partial class MultiPlayerMenu : Window
     {
-        private MultiViewModel svm;
+        private MultiMenuViewModel svm;
         public MultiPlayerMenu()
         {
             InitializeComponent();
-            IMultiModel sm = new ApplicationMultiModel();
-            svm = new MultiViewModel(sm);
+            IMultiMenuModel sm = new MultiMenuModel();
+            svm = new MultiMenuViewModel(sm);
             this.DataContext = svm;
         }
 

@@ -20,7 +20,7 @@ namespace ClientProject
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1116);
             Client client = new Client(ep);
             // start client.
-            client.Start();
+            //client.Start();
             Console.ReadKey();
         }
     }

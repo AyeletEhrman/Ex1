@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MazeGUI
 {
-    class ApplicationSettingsModel : ISettingsModel
+    class SettingsMenuModel : ISettingsMenuModel
     {
         public string ServerIP {
             get { return Properties.Settings.Default.ServerIP; }

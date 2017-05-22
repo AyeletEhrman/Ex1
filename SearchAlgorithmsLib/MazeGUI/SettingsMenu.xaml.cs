@@ -19,12 +19,12 @@ namespace MazeGUI
     /// </summary>
     public partial class SettingsMenu : Window
     {
-        private SettingsViewModel vm;
+        private SettingsMenuViewModel vm;
         public SettingsMenu()
         {
             InitializeComponent();
-            ISettingsModel sm = new ApplicationSettingsModel();
-            vm = new SettingsViewModel(sm);
+            ISettingsMenuModel sm = new SettingsMenuModel();
+            vm = new SettingsMenuViewModel(sm);
             this.DataContext = vm;
         }
         private void OKBtn_Click(object sender, RoutedEventArgs e)

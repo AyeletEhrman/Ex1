@@ -4,72 +4,121 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClientProject;
+using System.Net;
+using System.ComponentModel;
 
 namespace MazeGUI
 {
-    class SingleGameModel
+    class SingleGameModel : /*NotifyChanges,*/ ISingleGameModel
     {
         // has Client
+        Client client;
+        int mazeRows;
+        int mazeCols;
+        string mazeName;
+        string mazeStr;
+        Position initialPos;
+        Position goalPos;
+        Position currentPos;
+        public SingleGameModel()
+        {
+            // open end poin  connection.
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), Properties.Settings.Default.ServerPort);
+            client = new Client(ep);
+            mazeRows = 0;
+            mazeCols = 0;
+            mazeName = "";
+            mazeStr = "";
+            initialPos = new Position(0, 0);
+            goalPos = new Position(0, 0);
+            currentPos = new Position(0, 0);
+        }
 
-
-        
-
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
         public int MazeRows
         {
-            get { return MazeRows; }
+            get { return mazeRows; }
             set
             {
-                MazeRows = value;
+                mazeRows = value;
+                NotifyPropertyChanged("MazeRows");
             }
         }
 
         public int MazeCols
         {
-            get { return MazeCols; }
+            get { return mazeCols; }
             set
             {
-                MazeCols = value;
+                mazeCols = value;
+                NotifyPropertyChanged("MazeCols");
             }
         }
-        public string Name
+        public string MazeName
         {
-            get { return model.Name; }
+            get { return mazeName; }
             set
             {
-                Name = value;
+                mazeName = value;
+                NotifyPropertyChanged("MazeName");
             }
         }
         public string MazeStr
         {
-            get { return model.MazeStr; }
+            get { return mazeStr;/*"1,0,0,0,0,0,1,0,1,1,1,1,0,0,0,1,0,0,0,1,1,0,1,1,0"*/ }
             set
             {
-                MazeStr = value;
+                mazeStr = value;
+                NotifyPropertyChanged("MazeStr");
             }
         }
-        public Position Initial
+        public Position InitialPos
         {
-            get { return model.Initial; }
+            get { return initialPos; }
             set
             {
-                Initial = value;
+                initialPos = value;
+                NotifyPropertyChanged("InitialPos");
             }
         }
-        public Position Goal
+        public Position GoalPos
         {
-            get { return model.Goal; }
+            get { return goalPos; }
             set
             {
-                Goal = value;
+                goalPos = value;
+                NotifyPropertyChanged("GoalPos");
             }
         }
-        public Position Current
+        public Position CurrentPos
         {
-            get { return model.Current; }
+            get { return currentPos; }
             set
             {
-                Current = value;
+                currentPos = value;
+                NotifyPropertyChanged("CurrentPos");
             }
+        }
+        public void Generate(string name, string rows, string cols)
+        {
+            string mazeJs;
+            mazeJs = client.Send("generate" + " " + name + " " + rows + " " + cols);
+            Maze maze = Maze.FromJSON(mazeJs);
+            MazeName = maze.Name;
+            MazeRows = maze.Rows;
+            MazeCols = maze.Cols;
+            MazeStr = maze.ToString();
+            InitialPos = maze.InitialPos;
+            GoalPos = maze.GoalPos;
+            CurrentPos = InitialPos;
         }
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MazeGUI
 {
-    class SettingsViewModel : ViewModel
+   class SettingsMenuViewModel : NotifyChanges
     {
-        private ISettingsModel model;
-        public SettingsViewModel(ISettingsModel model) {
+        private ISettingsMenuModel model;
+        public SettingsMenuViewModel(ISettingsMenuModel model) {
             this.model = model;
         }
         public string ServerIP {

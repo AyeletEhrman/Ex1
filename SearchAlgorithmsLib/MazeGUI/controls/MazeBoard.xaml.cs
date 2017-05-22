@@ -25,6 +25,31 @@ namespace MazeGUI.controls
         {
             InitializeComponent();
         }
+
+        // Using a DependencyProperty as the backing store for Rows.
+        // This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RowsProperty =
+            DependencyProperty.Register("Rows", typeof(int), typeof(MazeBoard), new PropertyMetadata(0));
+
+        public static readonly DependencyProperty ColsProperty =
+           DependencyProperty.Register("Cols", typeof(int), typeof(MazeBoard), new PropertyMetadata(0));
+
+        public static readonly DependencyProperty MazeProperty =
+           DependencyProperty.Register("Maze", typeof(string), typeof(MazeBoard));
+
+        public static readonly DependencyProperty MazeNameProperty =
+           DependencyProperty.Register("MazeName", typeof(string), typeof(MazeBoard));
+
+        public static readonly DependencyProperty InitialPosProperty =
+           DependencyProperty.Register("InitialPos", typeof(Position), typeof(MazeBoard));
+
+        public static readonly DependencyProperty GoalPosProperty =
+           DependencyProperty.Register("GoalPos", typeof(Position), typeof(MazeBoard));
+
+        public static readonly DependencyProperty CurrentPosProperty =
+           DependencyProperty.Register("CurrentPos", typeof(Position), typeof(MazeBoard));
+
+
         public int Rows
         {
             get { return (int)GetValue(RowsProperty); }
@@ -60,29 +85,50 @@ namespace MazeGUI.controls
             get { return (Position)GetValue(CurrentPosProperty); }
             set { SetValue(CurrentPosProperty, value); }
         }
-        // Using a DependencyProperty as the backing store for Rows.
-        // This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty RowsProperty =
-            DependencyProperty.Register("Rows", typeof(int), typeof(MazeBoard), new PropertyMetadata(0));
+       
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
 
-        public static readonly DependencyProperty ColsProperty =
-           DependencyProperty.Register("Cols", typeof(int), typeof(MazeBoard), new PropertyMetadata(0));
+        }
 
-        public static readonly DependencyProperty MazeProperty =
-           DependencyProperty.Register("Maze", typeof(string), typeof(MazeBoard));
+        public void DrawMaze()
+        {
+            ImageBrush initialBrush = new ImageBrush(new BitmapImage(new Uri("../../resources/monsters.jpg", UriKind.Relative)));////////////?????????
+            Rectangle initRec = new Rectangle();
+            initRec.Height = myCanvas.ActualHeight / Rows;
+            initRec.Width = myCanvas.ActualWidth / Cols;
+            initRec.Fill = initialBrush;
+            Canvas.SetLeft(initRec, InitialPos.Col * initRec.Width);
+            Canvas.SetTop(initRec, InitialPos.Row * initRec.Height);
+            myCanvas.Children.Add(initRec);
 
-        public static readonly DependencyProperty MazeNameProperty =
-           DependencyProperty.Register("MazeName", typeof(string), typeof(MazeBoard));
+            ImageBrush goalBrush = new ImageBrush(new BitmapImage(new Uri("../../resources/Boo.png", UriKind.Relative)));////////////?????????
+            Rectangle goalRec = new Rectangle();
+            goalRec.Height = myCanvas.ActualHeight / Rows;
+            goalRec.Width = myCanvas.ActualWidth / Cols;
+            goalRec.Fill = goalBrush;
+            Canvas.SetLeft(goalRec, GoalPos.Col * initRec.Width);
+            Canvas.SetTop(goalRec, GoalPos.Row * initRec.Height);
+            myCanvas.Children.Add(goalRec);
 
-        public static readonly DependencyProperty InitialPosProperty =
-           DependencyProperty.Register("InitialPos", typeof(Position), typeof(MazeBoard));
+            Maze = Maze.Replace(",", "");
 
-        public static readonly DependencyProperty GoalPosProperty =
-           DependencyProperty.Register("GoalPos", typeof(Position), typeof(MazeBoard));
-
-        public static readonly DependencyProperty CurrentPosProperty =
-           DependencyProperty.Register("CurrentPos", typeof(Position), typeof(MazeBoard));
-
-
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Cols; j++)
+                {
+                    if (Maze[i * Cols + j] == '1')
+                    {
+                        Rectangle rec = new Rectangle();
+                        rec.Height = myCanvas.ActualHeight / Rows;
+                        rec.Width = myCanvas.ActualWidth / Cols;
+                        rec.Fill = new SolidColorBrush(Colors.Black);
+                        Canvas.SetLeft(rec, j * rec.Width);
+                        Canvas.SetTop(rec, i * rec.Height);
+                        myCanvas.Children.Add(rec);
+                    }
+                }
+            }
+        }
     }
 }

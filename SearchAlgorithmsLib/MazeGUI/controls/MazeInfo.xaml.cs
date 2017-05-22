@@ -24,6 +24,6 @@ namespace MazeGUI.controls
         {
             InitializeComponent();
         }
-       
+        
     }
 }

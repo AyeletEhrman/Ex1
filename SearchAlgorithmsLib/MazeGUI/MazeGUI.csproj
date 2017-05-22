@@ -40,6 +40,9 @@
     <Reference Include="MazeLib">
       <HintPath>..\..\..\..\..\Desktop\MazeLib.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -60,37 +63,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ApplicationMultiModel.cs" />
-    <Compile Include="ApplicationSettingsModel.cs" />
-    <Compile Include="ApplicationSingleModel.cs" />
+    <Compile Include="ISingleGameModel.cs" />
+    <Compile Include="MultiMenuModel.cs" />
+    <Compile Include="SettingsMenuModel.cs" />
+    <Compile Include="SingleMenuModel.cs" />
     <Compile Include="controls\MazeBoard.xaml.cs">
       <DependentUpon>MazeBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="controls\MazeInfo.xaml.cs">
       <DependentUpon>MazeInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IModel.cs" />
-    <Compile Include="IMultiModel.cs" />
-    <Compile Include="ISettingsModel.cs" />
-    <Compile Include="ISingleModel.cs" />
+    <Compile Include="IMenuModel.cs" />
+    <Compile Include="IMultiMenuModel.cs" />
+    <Compile Include="ISettingsMenuModel.cs" />
+    <Compile Include="ISingleMenuModel.cs" />
     <Compile Include="MultiPlayerMenu.xaml.cs">
       <DependentUpon>MultiPlayerMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MultiViewModel.cs" />
+    <Compile Include="MultiMenuViewModel.cs" />
     <Compile Include="SettingsMenu.xaml.cs">
       <DependentUpon>SettingsMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsViewModel.cs" />
+    <Compile Include="SettingsMenuViewModel.cs" />
     <Compile Include="SingleGameModel.cs" />
-    <Compile Include="SinglePlayerMenu.xaml.cs">
-      <DependentUpon>SinglePlayerMenu.xaml</DependentUpon>
+    <Compile Include="SingleGameMenu.xaml.cs">
+      <DependentUpon>SingleGameMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SinglePlayerWindow.xaml.cs">
-      <DependentUpon>SinglePlayerWindow.xaml</DependentUpon>
+    <Compile Include="SingleGameWindow.xaml.cs">
+      <DependentUpon>SingleGameWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SingleViewModel.cs" />
-    <Compile Include="SingleWindowViewModel.cs" />
-    <Compile Include="ViewModel.cs" />
+    <Compile Include="SingleMenuViewModel.cs" />
+    <Compile Include="SingleGameViewModel.cs" />
+    <Compile Include="NotifyChanges.cs" />
     <Page Include="controls\MazeBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -123,11 +127,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SinglePlayerMenu.xaml">
+    <Page Include="SingleGameMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SinglePlayerWindow.xaml">
+    <Page Include="SingleGameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -153,6 +157,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -166,6 +171,19 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\Boo.png" />
+    <Resource Include="resources\monsters.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\monsterIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Client\ClientProject.csproj">
+      <Project>{7c6ab9e3-4c30-4834-86fe-37be74728895}</Project>
+      <Name>ClientProject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

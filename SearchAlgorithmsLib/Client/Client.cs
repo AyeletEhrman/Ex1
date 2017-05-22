@@ -10,7 +10,7 @@ namespace ClientProject
     /// <summary>
     /// the client.
     /// </summary>
-    class Client
+    public class Client
     {
         /// <summary>
         /// the end point connected.
@@ -43,63 +43,57 @@ namespace ClientProject
         /// <summary>
         /// starts the connection with the clients.
         /// </summary>
-        public void Start()
+        public string Send(string commandLine)
         {
-            while (true)
-            {
-                // if we didn't read already.
-                if (commandLine == null)
-                {
-                    commandLine = Console.ReadLine();
-                }
-                // open a tcpClient connection.
-                client = new TcpClient();
-                //  connect to server.
-                client.Connect(ep);
+            
+            // open a tcpClient connection.
+            client = new TcpClient();
+            //  connect to server.
+            client.Connect(ep);
+                
 
-                using (NetworkStream stream = client.GetStream())
-                using (BinaryReader reader = new BinaryReader(stream))
-                using (BinaryWriter writer = new BinaryWriter(stream))
+            using (NetworkStream stream = client.GetStream())
+            using (BinaryReader reader = new BinaryReader(stream))
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                try
                 {
-                    try
+                    // write the command to server.
+                    writer.Write(commandLine);
+                    writer.Flush();
+                    commandLine = null;
+                    // gets the type of game.
+                    string type = reader.ReadString();
+                    Console.WriteLine(type);
+                    // run single player game.
+                    if (type.Equals("single"))
                     {
-                        // write the command to server.
-                        writer.Write(commandLine);
-                        writer.Flush();
-                        commandLine = null;
-                        // gets the type of game.
-                        string type = reader.ReadString();
-                        Console.WriteLine(type);
-                        // run single player game.
-                        if (type.Equals("single"))
-                        {
-                            Single(client, reader);
-                        }
-                        // run multiplayer game.
-                        else if (type.Equals("multi"))
-                        {
-                            endMulti = false;
-                            Multi(client, reader, writer);
-                            while (!endMulti)
-                            {
-                                Thread.Sleep(100);
-                            }
-                            // finshed the game.
-                            client.Close();
-                            continue;
-                        }
-                        // error - close client.
-                        else
-                        {
-                            client.Close();
-                        }
+                        return Single(client, reader);
                     }
-                    catch (Exception e)
+                    // run multiplayer game.
+                    else if (type.Equals("multi"))
                     {
-                        Console.WriteLine(e.Message);
+                        endMulti = false;
+                        Multi(client, reader, writer);
+                        while (!endMulti)
+                        {
+                            Thread.Sleep(100);
+                        }
+                        // finshed the game.
+                        client.Close();
                     }
+                    // error - close client.
+                    else
+                    {
+                        client.Close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
             }
+            return null;
         }
 
         /// <summary>
@@ -107,14 +101,13 @@ namespace ClientProject
         /// </summary>
         /// <param name="client">the client connected.</param>
         /// <param name="reader">the clients reader streams</param>
-        private void Single(TcpClient client, BinaryReader reader)
+        private string Single(TcpClient client, BinaryReader reader)
         {
             // get result for the command.
             string result = reader.ReadString();
-            // print it.
-            Console.WriteLine(result);
             // close connection.
             client.Close();
+            return result;
         }
 
         /// <summary>

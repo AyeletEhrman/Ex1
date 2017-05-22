@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MazeGUI
 {
-    interface ISettingsModel : IModel
+    interface ISettingsMenuModel : IMenuModel
     {
         string ServerIP { get; set; }
         int ServerPort { get; set; }

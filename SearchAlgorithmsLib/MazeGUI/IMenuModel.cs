@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MazeGUI
 {
-    interface IModel
+    interface IMenuModel
     {
         void SaveSettings();
         int MazeRows { get; set; }

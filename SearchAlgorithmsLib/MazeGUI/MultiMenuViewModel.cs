@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MazeGUI
 {
-    class MultiViewModel : ViewModel
+    class MultiMenuViewModel : NotifyChanges
     {
-        private IMultiModel model;
-        public MultiViewModel(IMultiModel model)
+        private IMultiMenuModel model;
+        public MultiMenuViewModel(IMultiMenuModel model)
         {
             this.model = model;
         }

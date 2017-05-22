@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MazeGUI
 {
-    interface IMultiModel : IModel
+    interface IMultiMenuModel : IMenuModel
     {
         string Name { get; set;}
         string GamesList { get; set;}
