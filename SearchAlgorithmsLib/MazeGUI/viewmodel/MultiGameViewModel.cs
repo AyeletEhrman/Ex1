@@ -10,18 +10,17 @@ using System.Windows.Input;
 
 namespace MazeGUI.viewmodel
 {
-    class SingleGameViewModel : NotifyChanges
+    class MultiGameViewModel : NotifyChanges
     {
-        private ISingleGameModel model;
+        private IMultiGameModel model;
 
-        public SingleGameViewModel(ISingleGameModel model)
+        public MultiGameViewModel(IMultiGameModel model)
         {
             this.model = model;
             model.PropertyChanged += delegate (Object sender, PropertyChangedEventArgs e) {
-                                         NotifyPropertyChanged("VM_" + e.PropertyName);
-                                     };
+                NotifyPropertyChanged("VM_" + e.PropertyName);
+            };
         }
-
         public int VM_MazeRows
         {
             get { return model.MazeRows; }
@@ -58,14 +57,6 @@ namespace MazeGUI.viewmodel
         public bool Move(KeyEventArgs e)
         {
             return model.Move(e);
-        }
-        public void Restart()
-        {
-            model.Restart();
-        }
-        public void Solve()
-        {
-            model.Solve();
         }
     }
 }

@@ -88,18 +88,7 @@ namespace MazeGUI.view
 
         private void Solve_Click(object sender, RoutedEventArgs e)
         {
-            //bool taskFinished = false;
-            //new Task(()=>
-            //{
-                sgvm.Solve();
-                //taskFinished = true;
-
-               
-           // }).Start();
-           // while (!taskFinished)
-           // {
-              //  Thread.Sleep(1);
-           // }
+            sgvm.Solve();
             WinnerWindow ww = new WinnerWindow();
             ww.Owner = this;
             ww.Show();

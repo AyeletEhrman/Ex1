@@ -78,7 +78,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="model\GameModel.cs" />
+    <Compile Include="model\IMultiGameModel.cs" />
     <Compile Include="model\ISingleGameModel.cs" />
+    <Compile Include="model\MultiGameModel.cs" />
     <Compile Include="model\MultiMenuModel.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="model\SettingsMenuModel.cs" />
@@ -93,6 +96,8 @@
     <Compile Include="controls\IMultiMenuModel.cs" />
     <Compile Include="model\ISettingsMenuModel.cs" />
     <Compile Include="model\ISingleMenuModel.cs" />
+    <Compile Include="viewmodel\GameViewModel.cs" />
+    <Compile Include="viewmodel\MultiGameViewModel.cs" />
     <Compile Include="view\MultiGameMenu.xaml.cs">
       <DependentUpon>MultiGameMenu.xaml</DependentUpon>
     </Compile>

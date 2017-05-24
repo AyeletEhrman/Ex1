@@ -21,6 +21,8 @@
         </Grid.ColumnDefinitions>
         <TextBlock Margin="10,14,0,13" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2">List of games:</TextBlock>
         <ComboBox x:Name="cboList" Margin="10" Grid.Row="1" Grid.Column="2" SelectedIndex="{Binding GamesList, UpdateSourceTrigger=LostFocus}" IsEditable="False"></ComboBox>        <Button x:Name="btnJoin" Margin="10,3,10,17" Grid.Row="2" Grid.Column="2" Click="btnJoin_Click" >Join Game</Button>
-        <Controls:MazeInfo Margin="10" Grid.Row="3" Grid.ColumnSpan="3"/>
+
+        <Controls:MazeInfo x:Name="mazeInfo" Margin="10" Grid.Row="3" Grid.ColumnSpan="3"/>
+
     </Grid>
 </Window>

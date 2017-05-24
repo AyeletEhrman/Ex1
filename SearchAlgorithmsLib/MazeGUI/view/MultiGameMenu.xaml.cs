@@ -28,6 +28,29 @@ namespace MazeGUI.view
             IMultiMenuModel sm = new MultiMenuModel();
             svm = new MultiMenuViewModel(sm);
             this.DataContext = svm;
+            mazeInfo.btnStart.Click += delegate (Object sender, RoutedEventArgs e)
+            {
+                // writing task.
+                //new Task(() =>
+                //{
+                MultiGameWindow mgw = new MultiGameWindow();
+                mgw.Owner = this;
+                // spw.Generate(name, rows, cols);
+                int retVal = mgw.Generate(mazeInfo.txtMazeName.Text,
+                                          mazeInfo.txtRows.Text,
+                                          mazeInfo.txtCols.Text);
+                if (retVal < 0)
+                {
+                    /*Application.Current.MainWindow.Show();
+                    //this.Close();//??
+                    this.Hide();*/
+                }
+
+                //}).Start();
+                ///????????????????????????????????????????????????????????????????????
+                //this.Close();
+            };
+
         }
 
         private void btnJoin_Click(object sender, RoutedEventArgs e)

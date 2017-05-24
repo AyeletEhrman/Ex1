@@ -1,20 +1,16 @@
-﻿using MazeLib;
+﻿using ClientProject;
+using MazeLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using ClientProject;
-using System.Net;
-using System.ComponentModel;
 using System.Windows.Input;
-using System.Threading;
-using System.Windows;
-using System.Windows.Threading;
 
 namespace MazeGUI.model
 {
-    class SingleGameModel : NotifyChanges, ISingleGameModel
+    class MultiGameModel : GameModel, IMultiGameModel
     {
         Client client;
         int mazeRows;
@@ -26,9 +22,9 @@ namespace MazeGUI.model
         Position currentPos;
         Maze maze;
 
-        public SingleGameModel()
+        public MultiGameModel()
         {
-            // open end point connection.
+            // open end poin  connection.
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), Properties.Settings.Default.ServerPort);
             client = new Client(ep);
             mazeRows = 0;
@@ -39,6 +35,7 @@ namespace MazeGUI.model
             goalPos = new Position(0, 0);
             currentPos = new Position(0, 0);
         }
+
         public int MazeRows
         {
             get { return mazeRows; }
@@ -191,49 +188,6 @@ namespace MazeGUI.model
                 }
             }
         }
-        public void Restart()
-        {
-            Position pos = new Position(InitialPos.Row, InitialPos.Col);
-            CurrentPos = pos;
-        }
-        public void Solve()
-        {
 
-            string solution;
-            //  bool sleep = true;
-            solution = client.Send("solve" + " " + MazeName + " " +
-                                    Properties.Settings.Default.SearchAlgorithm);
-            string[] solutionFields = solution.Split(',');
-            solution = solutionFields[1];
-            solution = solution.Replace("\"Solution\":", "");
-            solution = solution.Replace("\"", "");
-            solution = solution.Replace(" ", "");
-
-            for (int i = 0; i < solution.Length; i++)
-            {
-                Application.Current.Dispatcher.Invoke(
-                    DispatcherPriority.Background, new Action(() =>
-                    {
-                        switch (solution[i])
-                        {
-                            case '0':
-                                MoveLeft();
-                                break;
-                            case '1':
-                                MoveRight();
-                                break;
-                            case '2':
-                                MoveUp();
-                                break;
-                            case '3':
-                                MoveDown();
-                                break;
-                            default:
-                                break;
-                        }
-                        Thread.Sleep(200);
-                    }));
-            }
-        }
     }
 }

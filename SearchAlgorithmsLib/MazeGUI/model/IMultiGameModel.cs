@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace MazeGUI.model
 {
-    interface ISingleGameModel : INotifyPropertyChanged
+    interface IMultiGameModel : INotifyPropertyChanged
     {
         int MazeRows { get; set; }
         int MazeCols { get; set; }
@@ -20,7 +20,5 @@ namespace MazeGUI.model
         Position CurrentPos { get; set; }
         int Generate(string name, string rows, string cols);
         bool Move(KeyEventArgs e);
-        void Restart();
-        void Solve();
     }
 }
