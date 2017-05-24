@@ -11,5 +11,5 @@
             <Canvas x:Name="myCanvas" Width="700" Height="680">
             </Canvas>
         </Border>
-        </Viewbox>
+    </Viewbox>
 </UserControl>

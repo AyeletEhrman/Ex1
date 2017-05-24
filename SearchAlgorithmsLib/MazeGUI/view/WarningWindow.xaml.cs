@@ -1,6 +1,4 @@
-﻿using MazeGUI.model;
-using MazeGUI.viewmodel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,24 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-namespace MazeGUI.controls
+namespace MazeGUI.view
 {
     /// <summary>
-    /// Interaction logic for MazeInfo.xaml
+    /// Interaction logic for WarningWindow.xaml
     /// </summary>
-    public partial class MazeInfo : UserControl
+    public partial class WarningWindow : Window
     {
-        private SettingsMenuViewModel smvm;
-        public MazeInfo()
+        public WarningWindow()
         {
             InitializeComponent();
-            smvm = new SettingsMenuViewModel(new SettingsMenuModel());
-            this.DataContext = smvm;
         }
-        
+
+        private void NoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

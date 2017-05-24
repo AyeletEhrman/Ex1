@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MazeGUI
+namespace MazeGUI.model
 {
     interface ISingleMenuModel : IMenuModel
     {
         string Name { get; set;}
-        void Generate(string name, string rows, string cols);
+        //int Generate(string name, string rows, string cols);
     }
 }

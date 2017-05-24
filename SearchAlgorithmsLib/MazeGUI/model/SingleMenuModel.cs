@@ -1,22 +1,18 @@
-﻿using System;
+﻿using MazeGUI.view;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MazeGUI
+namespace MazeGUI.model
 {
-    class MultiMenuModel : IMultiMenuModel
+    class SingleMenuModel : ISingleMenuModel
     {
         public string Name
         {
             get { return Properties.Settings.Default.Name; }
-            set { Properties.Settings.Default.Name = value; }
-        }
-        public string GamesList
-        {
-            get { return Properties.Settings.Default.GamesList; }
-            set { Properties.Settings.Default.GamesList = value; }
+            set { /*Properties.Settings.Default.Name = value;*/ }
         }
         public int MazeRows
         {
@@ -32,6 +28,12 @@ namespace MazeGUI
         {
             Properties.Settings.Default.Save();
         }
+
+      /*  public int Generate(string name, string rows, string cols)
+        {
+            SingleGameWindow sgw = new SingleGameWindow();
+            return sgw.Generate(name, rows, cols);
+
+        }*/
     }
 }
-

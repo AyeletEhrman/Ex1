@@ -1,14 +1,16 @@
-﻿using MazeLib;
+﻿using MazeGUI.model;
+using MazeLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
-namespace MazeGUI
+namespace MazeGUI.viewmodel
 {
-    class SingleGameViewModel : INotifyPropertyChanged //NotifyChanges
+    class SingleGameViewModel : NotifyChanges
     {
         private ISingleGameModel model;
 
@@ -20,7 +22,7 @@ namespace MazeGUI
                                      };
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+     /*   public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propName)
         {
             if (PropertyChanged != null)
@@ -28,75 +30,87 @@ namespace MazeGUI
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
            // this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
+        }*/
 
         public int VM_MazeRows
         {
             get { return model.MazeRows; }
-            set
+    /*        set
             {
                 model.MazeRows = value;
                 NotifyPropertyChanged("VM_MazeRows");
-            }
+            }*/
         }
 
         public int VM_MazeCols
         {
             get { return model.MazeCols; }
-            set
+ /*           set
             {
                 model.MazeCols = value;
                 NotifyPropertyChanged("VM_MazeCols");
-            }
+            }*/
         }
         public string VM_MazeName
         {
             get { return model.MazeName; }
-            set
+  /*          set
             {
                 model.MazeName = value;
                 NotifyPropertyChanged("VM_MazeName");
-            }
+            }*/
         }
         public string VM_MazeStr
         {
             get { return model.MazeStr; }
-            set
+   /*         set
             {
                 model.MazeStr = value;
                 NotifyPropertyChanged("VM_MazeStr");
-            }
+            }*/
         }
         public Position VM_InitialPos
         {
             get { return model.InitialPos; }
-           set
+       /*    set
             {
                 model.InitialPos = value;
                 NotifyPropertyChanged("VM_InitialPos");
-            }
+            }*/
         }
         public Position VM_GoalPos
         {
             get { return model.GoalPos; }
-            set
+      /*      set
             {
                 model.GoalPos = value;
                 NotifyPropertyChanged("VM_GoalPos");
-            }
+            }*/
         }
         public Position VM_CurrentPos
         {
             get { return model.CurrentPos; }
-            set
+        /*    set
             {
                 model.CurrentPos = value;
                 NotifyPropertyChanged("VM_CurrentPos");
-            }
+            }*/
         }
-        public void Generate(string name, string rows, string cols)
+        public int Generate(string name, string rows, string cols)
         {
-            model.Generate(name, rows, cols);
+            return model.Generate(name, rows, cols);
+        }
+        public bool Move(KeyEventArgs e)
+        {
+            return model.Move(e);
+        }
+        public void Restart()
+        {
+            model.Restart();
+        }
+        public void Solve()
+        {
+            model.Solve();
         }
     }
 }

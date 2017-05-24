@@ -5,8 +5,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
-namespace MazeGUI
+namespace MazeGUI.model
 {
     interface ISingleGameModel : INotifyPropertyChanged
     {
@@ -18,6 +19,9 @@ namespace MazeGUI
         Position InitialPos { get; set; }
         Position GoalPos { get; set; }
         Position CurrentPos { get; set; }
-        void Generate(string name, string rows, string cols);
+        int Generate(string name, string rows, string cols);
+        bool Move(KeyEventArgs e);
+        void Restart();
+        void Solve();
     }
 }

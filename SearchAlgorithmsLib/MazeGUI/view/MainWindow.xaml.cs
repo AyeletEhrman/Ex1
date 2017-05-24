@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MazeGUI
+namespace MazeGUI.view
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -34,14 +34,17 @@ namespace MazeGUI
         {
             SingleGameMenu menu = new SingleGameMenu();
             menu.Owner = this;
-            
+            this.Hide();
             menu.ShowDialog();
+            
+           
         }
 
         private void MultiBtn_Click(object sender, RoutedEventArgs e)
         {
-            MultiPlayerMenu menu = new MultiPlayerMenu();
+            MultiGameMenu menu = new MultiGameMenu();
             menu.Owner = this;
+            this.Hide();
             menu.ShowDialog();
         }
 
@@ -49,6 +52,7 @@ namespace MazeGUI
         {
             SettingsMenu menu = new SettingsMenu();
             menu.Owner = this;
+            this.Hide();
             menu.ShowDialog();
         }
     }

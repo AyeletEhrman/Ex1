@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MazeGUI.model;
+using MazeGUI.viewmodel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace MazeGUI
+namespace MazeGUI.view
 {
     /// <summary>
     /// Interaction logic for SettingsMenu.xaml
@@ -39,6 +29,11 @@ namespace MazeGUI
             MainWindow win = (MainWindow)Application.Current.MainWindow;
             win.Show();
             this.Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.MainWindow.Show();
         }
     }
 }

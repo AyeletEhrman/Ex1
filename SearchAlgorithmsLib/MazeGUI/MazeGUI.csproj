@@ -13,6 +13,21 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -63,38 +78,45 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ISingleGameModel.cs" />
-    <Compile Include="MultiMenuModel.cs" />
-    <Compile Include="SettingsMenuModel.cs" />
-    <Compile Include="SingleMenuModel.cs" />
+    <Compile Include="model\ISingleGameModel.cs" />
+    <Compile Include="model\MultiMenuModel.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="model\SettingsMenuModel.cs" />
+    <Compile Include="model\SingleMenuModel.cs" />
     <Compile Include="controls\MazeBoard.xaml.cs">
       <DependentUpon>MazeBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="controls\MazeInfo.xaml.cs">
       <DependentUpon>MazeInfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IMenuModel.cs" />
-    <Compile Include="IMultiMenuModel.cs" />
-    <Compile Include="ISettingsMenuModel.cs" />
-    <Compile Include="ISingleMenuModel.cs" />
-    <Compile Include="MultiPlayerMenu.xaml.cs">
-      <DependentUpon>MultiPlayerMenu.xaml</DependentUpon>
+    <Compile Include="model\IMenuModel.cs" />
+    <Compile Include="controls\IMultiMenuModel.cs" />
+    <Compile Include="model\ISettingsMenuModel.cs" />
+    <Compile Include="model\ISingleMenuModel.cs" />
+    <Compile Include="view\MultiGameMenu.xaml.cs">
+      <DependentUpon>MultiGameMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MultiMenuViewModel.cs" />
-    <Compile Include="SettingsMenu.xaml.cs">
+    <Compile Include="viewmodel\MultiMenuViewModel.cs" />
+    <Compile Include="view\SettingsMenu.xaml.cs">
       <DependentUpon>SettingsMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsMenuViewModel.cs" />
-    <Compile Include="SingleGameModel.cs" />
-    <Compile Include="SingleGameMenu.xaml.cs">
+    <Compile Include="viewmodel\SettingsMenuViewModel.cs" />
+    <Compile Include="model\SingleGameModel.cs" />
+    <Compile Include="view\SingleGameMenu.xaml.cs">
       <DependentUpon>SingleGameMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SingleGameWindow.xaml.cs">
+    <Compile Include="view\SingleGameWindow.xaml.cs">
       <DependentUpon>SingleGameWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SingleMenuViewModel.cs" />
-    <Compile Include="SingleGameViewModel.cs" />
+    <Compile Include="viewmodel\SingleMenuViewModel.cs" />
+    <Compile Include="viewmodel\SingleGameViewModel.cs" />
     <Compile Include="NotifyChanges.cs" />
+    <Compile Include="view\WarningWindow.xaml.cs">
+      <DependentUpon>WarningWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\WinnerWindow.xaml.cs">
+      <DependentUpon>WinnerWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="controls\MazeBoard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -103,7 +125,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="view\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -111,34 +133,42 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="view\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MultiPlayerMenu.xaml">
+    <Page Include="view\MultiGameMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MultiPlayerWindow.xaml">
+    <Page Include="view\MultiGameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SettingsMenu.xaml">
+    <Page Include="view\SettingsMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SingleGameMenu.xaml">
+    <Page Include="view\SingleGameMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SingleGameWindow.xaml">
+    <Page Include="view\SingleGameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\WarningWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\WinnerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MultiPlayerWindow.xaml.cs">
-      <DependentUpon>MultiPlayerWindow.xaml</DependentUpon>
+    <Compile Include="view\MultiGameWindow.xaml.cs">
+      <DependentUpon>MultiGameWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -184,6 +214,29 @@
       <Project>{7c6ab9e3-4c30-4834-86fe-37be74728895}</Project>
       <Name>ClientProject</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\door.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\looser.jpg" />
+    <Resource Include="resources\main.png" />
+    <Resource Include="resources\winner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

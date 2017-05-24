@@ -1,10 +1,13 @@
-﻿using System;
+﻿using MazeGUI.model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
-namespace MazeGUI
+namespace MazeGUI.viewmodel
 {
     class SingleMenuViewModel : NotifyChanges
     {
@@ -49,9 +52,10 @@ namespace MazeGUI
             model.SaveSettings();
         }
 
-        public void Generate(string name, string rows, string cols)
+    /*    public void Generate(string name, string rows, string cols)
         {
             model.Generate(name, rows, cols);
-        }
+        }*/
+        
     }
 }

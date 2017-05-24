@@ -12,16 +12,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace MazeGUI
+namespace MazeGUI.view
 {
     /// <summary>
-    /// Interaction logic for MultiPlayerWindow.xaml
+    /// Interaction logic for WinnerWindow.xaml
     /// </summary>
-    public partial class MultiPlayerWindow : Window
+    public partial class WinnerWindow : Window
     {
-        public MultiPlayerWindow()
+        public WinnerWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Owner.Close();
+        }
+
+        private void menuBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Owner.Close();
+            this.Close();
         }
     }
 }

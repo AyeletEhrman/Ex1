@@ -1,12 +1,12 @@
-﻿<Window x:Class="MazeGUI.MultiPlayerMenu"
+﻿<Window x:Class="MazeGUI.view.MultiGameMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MazeGUI"
+        xmlns:local="clr-namespace:MazeGUI.view"
         mc:Ignorable="d"
         xmlns:Controls= "clr-namespace:MazeGUI.controls"
-        Title="MultiPlayerMenu" Height="277.683" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+        Title="MultiGameMenu" Height="277.683" Width="300" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" Closing="Window_Closing">
     <Grid TextBlock.FontSize="14" Height="265" VerticalAlignment="Top" Margin="0,0,0,-3">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
