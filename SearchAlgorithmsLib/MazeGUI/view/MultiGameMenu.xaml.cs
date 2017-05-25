@@ -2,8 +2,10 @@
 using MazeGUI.viewmodel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,22 +23,21 @@ namespace MazeGUI.view
     /// </summary>
     public partial class MultiGameMenu : Window
     {
-        private MultiMenuViewModel svm;
+        MultiMenuViewModel mmvm;
+        ObservableCollection<string> gamesList = new ObservableCollection<string>();
+        MultiGameWindow mgw;
         public MultiGameMenu()
         {
             InitializeComponent();
-            IMultiMenuModel sm = new MultiMenuModel();
-            svm = new MultiMenuViewModel(sm);
-            this.DataContext = svm;
+            mgw = new MultiGameWindow();
+            
+            IMultiMenuModel mm = new MultiMenuModel();
+            mmvm = new MultiMenuViewModel(mm);
+            this.DataContext = mmvm;
             mazeInfo.btnStart.Click += delegate (Object sender, RoutedEventArgs e)
             {
-                // writing task.
-                //new Task(() =>
-                //{
-                MultiGameWindow mgw = new MultiGameWindow();
                 mgw.Owner = this;
-                // spw.Generate(name, rows, cols);
-                int retVal = mgw.Generate(mazeInfo.txtMazeName.Text,
+                int retVal = mgw.Start(mazeInfo.txtMazeName.Text,
                                           mazeInfo.txtRows.Text,
                                           mazeInfo.txtCols.Text);
                 if (retVal < 0)
@@ -45,17 +46,32 @@ namespace MazeGUI.view
                     //this.Close();//??
                     this.Hide();*/
                 }
-
-                //}).Start();
-                ///????????????????????????????????????????????????????????????????????
                 //this.Close();
+                //Thread.Sleep(1000);
+                
             };
+            
+            games.ItemsSource = gamesList;            string gamesLst = mmvm.List();
+            if (!gamesLst.Equals("[]"))
+            {
+                gamesLst = gamesLst.Replace("\r\n", "");
+                gamesLst = gamesLst.Replace("[", "");
+                gamesLst = gamesLst.Replace("]", "");
+                gamesLst = gamesLst.Replace(" ", "");
+                gamesLst = gamesLst.Replace("\"", "");
+                string[] gamesArr = gamesLst.Split(',');
 
+                for (int i = 0; i < gamesArr.Length; i++)
+                {
+                    gamesList.Add(gamesArr[i]);
+                }
+            }
         }
 
-        private void btnJoin_Click(object sender, RoutedEventArgs e)
+        private void BtnJoin_Click(object sender, RoutedEventArgs e)
         {
-
+            mgw.Owner = this;
+            mgw.Join(gamesList[games.SelectedIndex]);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A3F932FD-47EC-4229-9499-3FB57B68B95C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MAZE1</RootNamespace>
+    <AssemblyName>MAZE1</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="controls\MazeBoard.xaml.cs">
+      <DependentUpon>MazeBoard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="controls\MazeInfo.xaml.cs">
+      <DependentUpon>MazeInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="model\GameModel.cs" />
+    <Compile Include="model\IMenuModel.cs" />
+    <Compile Include="model\IMultiGameModel.cs" />
+    <Compile Include="model\IMultiMenuModel.cs" />
+    <Compile Include="model\ISettingsMenuModel.cs" />
+    <Compile Include="model\ISingleGameModel.cs" />
+    <Compile Include="model\ISingleMenuModel.cs" />
+    <Compile Include="model\MultiGameModel.cs" />
+    <Compile Include="model\MultiMenuModel.cs" />
+    <Compile Include="model\SettingsMenuModel.cs" />
+    <Compile Include="model\SingleGameModel.cs" />
+    <Compile Include="model\SingleMenuModel.cs" />
+    <Compile Include="NotifyChanges.cs" />
+    <Compile Include="obj\Debug\App.g.cs" />
+    <Compile Include="obj\Debug\App.g.i.cs" />
+    <Compile Include="obj\Debug\controls\MazeBoard.g.cs" />
+    <Compile Include="obj\Debug\controls\MazeBoard.g.i.cs" />
+    <Compile Include="obj\Debug\controls\MazeInfo.g.cs" />
+    <Compile Include="obj\Debug\controls\MazeInfo.g.i.cs" />
+    <Compile Include="obj\Debug\GeneratedInternalTypeHelper.g.cs" />
+    <Compile Include="obj\Debug\GeneratedInternalTypeHelper.g.i.cs" />
+    <Compile Include="obj\Debug\MainWindow.g.i.cs" />
+    <Compile Include="obj\Debug\MultiPlayerMenu.g.i.cs" />
+    <Compile Include="obj\Debug\MultiPlayerWindow.g.i.cs" />
+    <Compile Include="obj\Debug\SettingsMenu.g.i.cs" />
+    <Compile Include="obj\Debug\SingleGameMenu.g.i.cs" />
+    <Compile Include="obj\Debug\SingleGameWindow.g.i.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="obj\Debug\view\MainWindow.g.cs" />
+    <Compile Include="obj\Debug\view\MainWindow.g.i.cs" />
+    <Compile Include="obj\Debug\view\MultiGameMenu.g.cs" />
+    <Compile Include="obj\Debug\view\MultiGameMenu.g.i.cs" />
+    <Compile Include="obj\Debug\view\MultiGameWindow.g.cs" />
+    <Compile Include="obj\Debug\view\MultiGameWindow.g.i.cs" />
+    <Compile Include="obj\Debug\view\MultiPlayerMenu.g.i.cs" />
+    <Compile Include="obj\Debug\view\MultiPlayerWindow.g.i.cs" />
+    <Compile Include="obj\Debug\view\SettingsMenu.g.cs" />
+    <Compile Include="obj\Debug\view\SettingsMenu.g.i.cs" />
+    <Compile Include="obj\Debug\view\SingleGameMenu.g.cs" />
+    <Compile Include="obj\Debug\view\SingleGameMenu.g.i.cs" />
+    <Compile Include="obj\Debug\view\SingleGameWindow.g.cs" />
+    <Compile Include="obj\Debug\view\SingleGameWindow.g.i.cs" />
+    <Compile Include="obj\Debug\view\SureWindow.g.i.cs" />
+    <Compile Include="obj\Debug\view\WarningWindow.g.cs" />
+    <Compile Include="obj\Debug\view\WarningWindow.g.i.cs" />
+    <Compile Include="obj\Debug\view\Window1.g.i.cs" />
+    <Compile Include="obj\Debug\view\WinnerWindow.g.cs" />
+    <Compile Include="obj\Debug\view\WinnerWindow.g.i.cs" />
+    <Compile Include="obj\Release\App.g.cs" />
+    <Compile Include="obj\Release\controls\MazeBoard.g.cs" />
+    <Compile Include="obj\Release\controls\MazeInfo.g.cs" />
+    <Compile Include="obj\Release\GeneratedInternalTypeHelper.g.cs" />
+    <Compile Include="obj\Release\MainWindow.g.cs" />
+    <Compile Include="obj\Release\MultiPlayerMenu.g.cs" />
+    <Compile Include="obj\Release\MultiPlayerWindow.g.cs" />
+    <Compile Include="obj\Release\SettingsMenu.g.cs" />
+    <Compile Include="obj\Release\SingleGameMenu.g.cs" />
+    <Compile Include="obj\Release\SingleGameWindow.g.cs" />
+    <Compile Include="obj\Release\view\MainWindow.g.cs" />
+    <Compile Include="obj\Release\view\MultiGameMenu.g.cs" />
+    <Compile Include="obj\Release\view\MultiGameWindow.g.cs" />
+    <Compile Include="obj\Release\view\SettingsMenu.g.cs" />
+    <Compile Include="obj\Release\view\SingleGameMenu.g.cs" />
+    <Compile Include="obj\Release\view\SingleGameWindow.g.cs" />
+    <Compile Include="obj\Release\view\WarningWindow.g.cs" />
+    <Compile Include="obj\Release\view\WinnerWindow.g.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="viewmodel\GameViewModel.cs" />
+    <Compile Include="viewmodel\MultiGameViewModel.cs" />
+    <Compile Include="viewmodel\MultiMenuViewModel.cs" />
+    <Compile Include="viewmodel\SettingsMenuViewModel.cs" />
+    <Compile Include="viewmodel\SingleGameViewModel.cs" />
+    <Compile Include="viewmodel\SingleMenuViewModel.cs" />
+    <Compile Include="view\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\MultiGameMenu.xaml.cs">
+      <DependentUpon>MultiGameMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\MultiGameWindow.xaml.cs">
+      <DependentUpon>MultiGameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\SettingsMenu.xaml.cs">
+      <DependentUpon>SettingsMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\SingleGameMenu.xaml.cs">
+      <DependentUpon>SingleGameMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\SingleGameWindow.xaml.cs">
+      <DependentUpon>SingleGameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\WarningWindow.xaml.cs">
+      <DependentUpon>WarningWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\WinnerWindow.xaml.cs">
+      <DependentUpon>WinnerWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="controls\MazeBoard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="controls\MazeInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="view\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="view\MultiGameMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="view\MultiGameWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="view\SettingsMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="view\SingleGameMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="view\SingleGameWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="view\WarningWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="view\WinnerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="obj\Debug\MazeGUI.g.resources" />
+    <EmbeddedResource Include="obj\Debug\MazeGUI.Properties.Resources.resources" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="obj\Debug\CoreCompileInputs.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\MazeGUI.csproj.GenerateResource.Cache" />
+    <None Include="obj\Debug\MazeGUI.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Debug\MazeGUI_MarkupCompile.cache" />
+    <None Include="obj\Debug\MazeGUI_MarkupCompile.i.cache" />
+    <None Include="obj\Debug\MazeGUI_MarkupCompile.lref" />
+    <None Include="obj\Release\CoreCompileInputs.cache" />
+    <None Include="obj\Release\MazeGUI_MarkupCompile.cache" />
+    <None Include="obj\Release\MazeGUI_MarkupCompile.lref" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="basic_maze.ico" />
+    <Content Include="MazeGUI.csproj" />
+    <Content Include="MazeGUI.csproj.user" />
+    <Content Include="obj\Debug\a964c1d1-b101-4fff-9765-3b242f38b286_MazeGUI.exe" />
+    <Resource Include="obj\Debug\MazeGUI.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\MazeGUI.pdb" />
+    <Content Include="obj\Debug\TempPE\Properties.Resources.Designer.cs.dll" />
+    <Resource Include="resources\2.png" />
+    <Resource Include="resources\38d6590270b9e93bb1175b720681f8df.jpg" />
+    <Resource Include="resources\Boo.png" />
+    <Resource Include="resources\colorfulMaze.jpg" />
+    <Resource Include="resources\door.jpg" />
+    <Resource Include="resources\icon.ico" />
+    <Resource Include="resources\loading.gif" />
+    <Resource Include="resources\looser.jpg" />
+    <Resource Include="resources\main.png" />
+    <Resource Include="resources\monsterIcon.ico" />
+    <Resource Include="resources\monsters.jpg" />
+    <Resource Include="resources\winner.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

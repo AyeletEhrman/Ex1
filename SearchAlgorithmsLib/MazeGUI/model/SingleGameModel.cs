@@ -105,8 +105,8 @@ namespace MazeGUI.model
         }
         public int Generate(string name, string rows, string cols)
         {
-            string mazeJs;
-            mazeJs = client.Send("generate" + " " + name + " " + rows + " " + cols);
+            client.Send("generate" + " " + name + " " + rows + " " + cols);
+            string mazeJs = client.Answer;
             if (mazeJs.Equals("bad args"))
             {
                 return -1;
@@ -198,11 +198,11 @@ namespace MazeGUI.model
         }
         public void Solve()
         {
-
-            string solution;
+           
             //  bool sleep = true;
-            solution = client.Send("solve" + " " + MazeName + " " +
-                                    Properties.Settings.Default.SearchAlgorithm);
+            client.Send("solve" + " " + MazeName + " " +
+                        Properties.Settings.Default.SearchAlgorithm);
+            string solution = client.Answer;
             string[] solutionFields = solution.Split(',');
             solution = solutionFields[1];
             solution = solution.Replace("\"Solution\":", "");

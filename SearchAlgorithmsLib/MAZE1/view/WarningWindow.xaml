@@ -1,0 +1,14 @@
+﻿<Window x:Class="MazeGUI.view.WarningWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MazeGUI.view"
+        mc:Ignorable="d"
+        Title="WarningWindow" Height="200" Width="300"  ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <TextBox HorizontalAlignment="Center" Height="57" TextAlignment="Center" TextWrapping="Wrap" Text="Are you sure?" VerticalAlignment="Center" Width="292" FontSize="36" FontWeight="Bold" VerticalContentAlignment="Center" FontFamily="Segoe UI Semibold" Margin="0,21,0,91" BorderBrush="White"/>
+        <Button Name="yesBtn" Content="YES" HorizontalAlignment="Left" Height="35" Margin="36,115,0,0" VerticalAlignment="Top" Width="93"/>
+        <Button Name="noBtn" Content="NO" HorizontalAlignment="Left" Height="35" Margin="164,115,0,0" VerticalAlignment="Top" Width="93" Click="NoBtn_Click"/>
+    </Grid>
+</Window>

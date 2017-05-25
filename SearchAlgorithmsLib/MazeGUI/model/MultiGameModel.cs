@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MazeGUI.model
@@ -20,8 +22,9 @@ namespace MazeGUI.model
         Position initialPos;
         Position goalPos;
         Position currentPos;
+        Position opponentPos;
         Maze maze;
-
+        bool sendClose;
         public MultiGameModel()
         {
             // open end poin  connection.
@@ -34,6 +37,8 @@ namespace MazeGUI.model
             initialPos = new Position(0, 0);
             goalPos = new Position(0, 0);
             currentPos = new Position(0, 0);
+            opponentPos = new Position(0, 0);
+            sendClose = true;
         }
 
         public int MazeRows
@@ -100,24 +105,94 @@ namespace MazeGUI.model
                 NotifyPropertyChanged("CurrentPos");
             }
         }
-        public int Generate(string name, string rows, string cols)
+        public Position OpponentPos
         {
-            string mazeJs;
-            mazeJs = client.Send("generate" + " " + name + " " + rows + " " + cols);
+            get { return opponentPos; }
+            set
+            {
+                opponentPos = value;
+                NotifyPropertyChanged("OpponentPos");
+               // NotifyPropertyChanged("CurrentPos");
+            }
+        }
+        public int Start(string name, string rows, string cols)
+        {
+            new Task(() =>
+            {
+                client.Send("start" + " " + name + " " + rows + " " + cols);
+            }).Start();
+
+            while (!client.NextCommand)
+            {
+                Thread.Sleep(100);
+            }
+            client.NextCommand = false;
+
+            string mazeJs = client.Answer;
+
             if (mazeJs.Equals("bad args"))
             {
                 return -1;
             }
-            maze = Maze.FromJSON(mazeJs);
-            MazeName = maze.Name;
-            MazeRows = maze.Rows;
-            MazeCols = maze.Cols;
-            MazeStr = maze.ToString();
-            InitialPos = maze.InitialPos;
-            GoalPos = maze.GoalPos;
-            CurrentPos = InitialPos;
+            UpdateProperties(mazeJs);
             return 1;
         }
+
+        public void Join(string name)
+        {
+            new Task(() =>
+            {
+                client.Send("join" + " " + name);
+            }).Start();
+
+            while(!client.NextCommand)
+            {
+                Thread.Sleep(100);
+            }
+            client.NextCommand = false;
+
+            string mazeJs = client.Answer;
+            UpdateProperties(mazeJs);
+        }
+
+        public bool Play()
+        {
+            Console.WriteLine("in play");
+            while (client.Answer != "game over")
+            {
+                if (client.Answer.Equals("multi") || client.Answer.Equals("game over"))///////
+                {
+                    continue;
+                }
+                if (client.NextCommand)
+                {
+                    bool lost = MoveOpponnent(client.Answer);
+                    if(lost)
+                    {
+                        return false;
+                    }
+                    client.NextCommand = false;
+                }
+
+                Thread.Sleep(100);
+                Console.WriteLine("in loop");
+            }
+
+        //    MessageBox.Show("Opponent exited \n GAME OVER");
+            Console.WriteLine("hello from client");
+            sendClose = false;
+            return true;
+        }
+
+        public void Close()
+        {
+            if (sendClose)
+            {
+                client.CommandLine = "close" + " " + MazeName;
+                client.CommandReady = true;
+            }
+        }
+
         public bool Move(KeyEventArgs e)
         {
             switch (e.Key)
@@ -150,8 +225,10 @@ namespace MazeGUI.model
             {
                 if (maze[CurrentPos.Row - 1, CurrentPos.Col] == 0)
                 {
-                    Position pos = new Position(CurrentPos.Row - 1, currentPos.Col);
-                    CurrentPos = pos;
+                    Position posTemp = new Position(CurrentPos.Row - 1, CurrentPos.Col);
+                    CurrentPos = posTemp;
+                    client.CommandLine = "play up";
+                    client.CommandReady = true;
                 }
             }
         }
@@ -161,8 +238,10 @@ namespace MazeGUI.model
             {
                 if (maze[CurrentPos.Row + 1, CurrentPos.Col] == 0)
                 {
-                    Position pos = new Position(CurrentPos.Row + 1, CurrentPos.Col);
-                    CurrentPos = pos;
+                    Position posTemp = new Position(CurrentPos.Row + 1, CurrentPos.Col);
+                    CurrentPos = posTemp;
+                    client.CommandLine = "play down";
+                    client.CommandReady = true;
                 }
             }
         }
@@ -172,8 +251,10 @@ namespace MazeGUI.model
             {
                 if (maze[CurrentPos.Row, CurrentPos.Col - 1] == 0)
                 {
-                    Position pos = new Position(CurrentPos.Row, CurrentPos.Col - 1);
-                    CurrentPos = pos;
+                    Position posTemp = new Position(CurrentPos.Row, CurrentPos.Col - 1);
+                    CurrentPos = posTemp;
+                    client.CommandLine = "play left";
+                    client.CommandReady = true;
                 }
             }
         }
@@ -183,11 +264,62 @@ namespace MazeGUI.model
             {
                 if (maze[CurrentPos.Row, CurrentPos.Col + 1] == 0)
                 {
-                    Position pos = new Position(CurrentPos.Row, CurrentPos.Col + 1);
-                    CurrentPos = pos;
+                    Position posTemp = new Position(CurrentPos.Row, CurrentPos.Col + 1);
+                    CurrentPos = posTemp;
+                    client.CommandLine = "play right";
+                    client.CommandReady = true;
                 }
             }
         }
+        private void UpdateProperties(string mazeJs)
+        {
+            maze = Maze.FromJSON(mazeJs);
+            MazeName = maze.Name;
+            MazeRows = maze.Rows;
+            MazeCols = maze.Cols;
+            MazeStr = maze.ToString();
+            InitialPos = maze.InitialPos;
+            GoalPos = maze.GoalPos;
+            CurrentPos = InitialPos;
+            OpponentPos = InitialPos;
+        }
+        public bool MoveOpponnent(string oppMove)
+        {
+            string[] oppMoveArr = oppMove.Split(',');
+            oppMove = oppMoveArr[1];
+            oppMove = oppMove.Replace("\"", "");
+            oppMove = oppMove.Replace("}", "");
+            oppMove = oppMove.Replace(" ", "");
+            oppMove = oppMove.Replace("Direction:", "");
 
+            Position posTemp;
+            switch (oppMove)
+            {
+                case "up":
+                    posTemp = new Position(OpponentPos.Row - 1, OpponentPos.Col);
+                    OpponentPos = posTemp;
+                    break;
+                case "down":
+                    posTemp = new Position(OpponentPos.Row + 1, OpponentPos.Col);
+                    OpponentPos = posTemp;
+                    break;
+                case "right":
+                    posTemp = new Position(OpponentPos.Row, OpponentPos.Col + 1);
+                    OpponentPos = posTemp;
+                    break;
+                case "left":
+                    posTemp = new Position(OpponentPos.Row, OpponentPos.Col - 1);
+                    OpponentPos = posTemp;
+                    break;
+                default:
+                    break;
+            }
+            // if the player won.
+            if ((OpponentPos.Row == GoalPos.Row) && (OpponentPos.Col == GoalPos.Col))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -93,11 +93,12 @@
       <DependentUpon>MazeInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="model\IMenuModel.cs" />
-    <Compile Include="controls\IMultiMenuModel.cs" />
+    <Compile Include="model\IMultiMenuModel.cs" />
     <Compile Include="model\ISettingsMenuModel.cs" />
     <Compile Include="model\ISingleMenuModel.cs" />
     <Compile Include="viewmodel\GameViewModel.cs" />
     <Compile Include="viewmodel\MultiGameViewModel.cs" />
+    <Compile Include="view\looserWindow.cs" />
     <Compile Include="view\MultiGameMenu.xaml.cs">
       <DependentUpon>MultiGameMenu.xaml</DependentUpon>
     </Compile>
@@ -118,6 +119,9 @@
     <Compile Include="NotifyChanges.cs" />
     <Compile Include="view\WarningWindow.xaml.cs">
       <DependentUpon>WarningWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="view\LooserWindow.xaml.cs">
+      <DependentUpon>LooserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="view\WinnerWindow.xaml.cs">
       <DependentUpon>WinnerWindow.xaml</DependentUpon>
@@ -165,6 +169,10 @@
     <Page Include="view\WarningWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="view\LooserWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="view\WinnerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -242,6 +250,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\loading.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

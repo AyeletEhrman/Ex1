@@ -53,6 +53,10 @@ namespace MazeGUI.view
             bool winner = sgvm.Move(e);
             if (winner)
             {
+                restart.IsEnabled = false;
+                solve.IsEnabled = false;
+                mainMenu.IsEnabled = false;
+                e.Handled = true;
                 WinnerWindow ww = new WinnerWindow();
                 ww.Owner = this;
                 ww.Show();
@@ -62,7 +66,6 @@ namespace MazeGUI.view
         }
         private void MainMenu_Click(object sender, RoutedEventArgs e)
         {
-
             WarningWindow wrw = new WarningWindow();
             wrw.Owner = this;
             wrw.Show();
@@ -88,6 +91,9 @@ namespace MazeGUI.view
 
         private void Solve_Click(object sender, RoutedEventArgs e)
         {
+            restart.IsEnabled = false;
+            solve.IsEnabled = false;
+            mainMenu.IsEnabled = false;
             sgvm.Solve();
             WinnerWindow ww = new WinnerWindow();
             ww.Owner = this;

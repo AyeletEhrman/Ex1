@@ -106,15 +106,15 @@ namespace MazeGUI.controls
             {
                 Thread.Sleep(5);
             }
-            ImageBrush currBrush = new ImageBrush(new BitmapImage(new Uri("../../resources/monsters.jpg", UriKind.Relative)));////////////?????????
-            Rectangle currRec = new Rectangle();
-            currRec.Height = myCanvas.ActualHeight / Rows;
-            currRec.Width = myCanvas.ActualWidth / Cols;
-            currRec.Fill = currBrush;
-            Canvas.SetLeft(currRec, CurrentPos.Col * currRec.Width);
-            Canvas.SetTop(currRec, CurrentPos.Row * currRec.Height);
-            myCanvas.Children.Add(currRec);
-            lastPos = new Position(CurrentPos.Row, CurrentPos.Col);
+            ImageBrush initBrush = new ImageBrush(new BitmapImage(new Uri("../../resources/monsters.jpg", UriKind.Relative)));////////////?????????
+            Rectangle initRec = new Rectangle();
+            initRec.Height = myCanvas.ActualHeight / Rows;
+            initRec.Width = myCanvas.ActualWidth / Cols;
+            initRec.Fill = initBrush;
+            Canvas.SetLeft(initRec, InitialPos.Col * initRec.Width);
+            Canvas.SetTop(initRec, InitialPos.Row * initRec.Height);
+            myCanvas.Children.Add(initRec);
+            lastPos = new Position(InitialPos.Row, InitialPos.Col);
 
             ImageBrush goalBrush = new ImageBrush(new BitmapImage(new Uri("../../resources/Boo.png", UriKind.Relative)));////////////?????????
             Rectangle goalRec = new Rectangle();

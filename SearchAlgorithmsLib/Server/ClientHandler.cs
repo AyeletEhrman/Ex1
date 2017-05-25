@@ -93,7 +93,7 @@ namespace ServerProject
                         }
                     }
                 }
-                // closes the cient socket.
+                // closes the client socket.
                 client.Close();
             }).Start();
         }

@@ -27,7 +27,11 @@ namespace ClientProject
         /// <summary>
         /// the clients command.
         /// </summary>
-        string commandLine;
+        public string CommandLine { get; set; }
+        public bool NextCommand { get; set; }
+        public string Answer { get; set; }
+        public bool CommandReady { get; set; }
+
 
         /// <summary>
         /// the clients constroctor.
@@ -37,13 +41,16 @@ namespace ClientProject
         {
             ep = endPoint;
             endMulti = false;
-            commandLine = null;
+            CommandLine = null;
+            NextCommand = false;
+            Answer = null;
+            CommandReady = false;
         }
 
         /// <summary>
         /// starts the connection with the clients.
         /// </summary>
-        public string Send(string commandLine)
+        public void Send(string commandLine)
         {
             
             // open a tcpClient connection.
@@ -68,7 +75,8 @@ namespace ClientProject
                     // run single player game.
                     if (type.Equals("single"))
                     {
-                        return Single(client, reader);
+                        Answer = Single(client, reader);
+                        return;
                     }
                     // run multiplayer game.
                     else if (type.Equals("multi"))
@@ -93,7 +101,6 @@ namespace ClientProject
                     Console.WriteLine(e.Message);
                 }
             }
-            return null;
         }
 
         /// <summary>
@@ -131,19 +138,26 @@ namespace ClientProject
                     {
                         try
                         {
-                            if (commandLine == null)
+                            while (!CommandReady)// && !endMulti)
                             {
-                                commandLine = Console.ReadLine();
+                                Thread.Sleep(100);
+                                
+                             /*   if (disconnected)
+                                {
+                                    break;
+                                }*/
+                                //CommandLine = Console.ReadLine();
                             }
-                            
+                            CommandReady = false;
+
                             if (disconnected)
                             {
                                 break;
                             }
                             // write the next command to server.
-                            writer.Write(commandLine);
+                            writer.Write(CommandLine);
                             writer.Flush();
-                            commandLine = null;
+                            CommandLine = null;
                         }
                         catch (Exception e)
                         {
@@ -164,6 +178,7 @@ namespace ClientProject
                 {
                     try
                     {
+                        
                         // geting the result for the command.
                         string result = reader.ReadString();
                         // game is over - end connection.
@@ -171,15 +186,25 @@ namespace ClientProject
                         {
                             writer.Write("game over");
                             writer.Flush();
+                            Answer = "game over";
+
                             // client disconnected.
                             disconnected = true;
+                            NextCommand = true;
+                            Console.WriteLine("updated gameover");//
+                            endMulti = true;
                         }
                         // error or need to disconect.
                         else if (result.Equals("disconnect") || result.Equals("error occured"))
                         {
-                            Console.WriteLine("disconnect");
+                            Console.WriteLine(result);
                             // client disconnected.
+
+                            Answer = "game over";
                             disconnected = true;
+                            NextCommand = true;
+                            endMulti = true;
+                            
                         }
                         // witing for join.
                         else if (result.Equals("wait"))
@@ -188,7 +213,8 @@ namespace ClientProject
                         }
                         else
                         {
-                            Console.WriteLine(result);
+                            Answer = result;
+                            NextCommand = true;
                         }
                     }
                     catch (Exception)
@@ -197,6 +223,7 @@ namespace ClientProject
                         Thread.Sleep(10);
                     }
                 }
+                endMulti = true;
             });
             readTask.Start();
         }

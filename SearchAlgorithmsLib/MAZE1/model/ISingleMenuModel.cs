@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MazeGUI.model
 {
-    interface IMultiMenuModel : IMenuModel
+    interface ISingleMenuModel : IMenuModel
     {
         string Name { get; set;}
-        string GamesList { get; set;}
+        //int Generate(string name, string rows, string cols);
     }
 }

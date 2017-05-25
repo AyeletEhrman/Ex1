@@ -50,13 +50,29 @@ namespace MazeGUI.viewmodel
         {
             get { return model.CurrentPos; }
         }
-        public int Generate(string name, string rows, string cols)
+        public Position VM_OpponentPos
         {
-            return model.Generate(name, rows, cols);
+            get { return model.OpponentPos; }
+        }
+        public int Start(string name, string rows, string cols)
+        {
+            return model.Start(name, rows, cols);
+        }
+        public void Join(string name)
+        {
+            model.Join(name);
         }
         public bool Move(KeyEventArgs e)
         {
             return model.Move(e);
+        }
+        public bool Play()
+        {
+            return model.Play();
+        }
+        public void Close()
+        {
+            model.Close();
         }
     }
 }
