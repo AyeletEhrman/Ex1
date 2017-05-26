@@ -147,10 +147,7 @@ namespace MazeGUI.view
             wrw.Show();
             wrw.yesBtn.Click += delegate (object sender1, RoutedEventArgs e1)
             {
-               // mgvm.Close();
-              //  Application.Current.MainWindow.Show();
                 this.Close();
-               // Owner.Close();//??
             };
         }
         private void CloseWindow()
